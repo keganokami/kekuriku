@@ -95,22 +95,22 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>npm install --prefix ./src/vue/rakuriku-project/</id>
+						<id>npm install --prefix ./src/rakuriku/</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<arguments>install --prefix ./src/vue/rakuriku-project/</arguments>
+							<arguments>install --prefix ./src/rakuriku/</arguments>
 						</configuration>
 					</execution>
 					<execution>
-						<id>npm run build --prefix ./src/vue/rakuriku-project/</id>
+						<id>npm run build --prefix ./src/rakuriku/</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>run build --prefix ./src/vue/rakuriku-project/</arguments>
+							<arguments>run build --prefix ./src/rakuriku/</arguments>
 						</configuration>
 					</execution>
 				</executions>
