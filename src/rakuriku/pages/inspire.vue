@@ -1,19 +1,40 @@
+
 <template>
-  <v-row>
-    <v-col class="text-center">
-      <img
-        src="/v.png"
-        alt="Vuetify.js"
-        class="mb-5"
-      >
-      <blockquote class="blockquote">
-        &#8220;First, solve the problem. Then, write the code.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;John Johnson</em>
-          </small>
-        </footer>
-      </blockquote>
-    </v-col>
-  </v-row>
+    <div>
+      <template v-if="!this.$store.getters.isAuthenticated">
+        <input type="text" v-model="id">
+        <input type="password" v-model="password">
+        <button @click="login">ログイン</button>
+      </template>
+      <template v-if="$store.getters.isAuthenticated">
+        <p>{{$store.getters.id}}さん</p>
+        <button @click="logout">ログアウト</button>
+      </template>
+    </div>
 </template>
+ 
+ 
+<script>
+export default {
+  data() {
+    return {
+      id: '',
+      password: '',
+    };
+  },
+  methods: {
+    login() {
+        debugger
+      this.$store.dispatch('login', {
+        userId: this.id,
+        password: this.password
+      });
+      // this.id = '';
+      // this.password = '';
+    },
+    logout() {
+      this.$store.dispatch('logout');
+    },
+  }
+};
+</script>

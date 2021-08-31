@@ -1,9 +1,9 @@
 CREATE EXTENSION IF  NOT EXISTS pgcrypto WITH SCHEMA public;
 
 create table admins (
-  id serial primary key,
-  name varchar(255) not null,
+  userId varchar(255) primary key,
   password varchar(255) not null,
+  role VARCHAR(100) NOT NULL,
   ${commonColumns}
 );
-insert into admins(name, password) values ('admin', 'pass');
+insert into admins(userId, password, role) values ('admin001', 'pass', 'admin');

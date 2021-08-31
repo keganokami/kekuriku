@@ -17,7 +17,7 @@ public class BaseController {
 
     @GetMapping(path = "/")
     public String getSpa() {
-        return "forward:/index.html";
+        return "forward:/200.html";
     }
 
     @GetMapping("/test")
