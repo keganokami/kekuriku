@@ -31,6 +31,7 @@ export const actions = {
           }
         )
         .then(() => {
+          debugger
             commit('updateId', authData.userId);
         });
     },

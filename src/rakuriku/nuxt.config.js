@@ -6,6 +6,10 @@ export default {
   generate: {
     dir: '../main/resources/static',
   },
+
+  router: {
+    middleware: 'auth-gard'
+  },
   
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -48,7 +52,13 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/axios",
+    ['cookie-universal-nuxt', { parseJSON: false }],
   ],
+
+  axios: {
+    proxy: true,
+    prefix: '/api',
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
