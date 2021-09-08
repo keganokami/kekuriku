@@ -1,6 +1,6 @@
-export default function ({$cookies, store, redirect, route, $auth }) {
+export default function ({store, redirect, route }) {
 
-    const token = $cookies.get('XSRF-TOKEN');
+    const token = localStorage.getItem('token');
 
     if (route.name === 'login' && !store.getters.isAuthenticated) {
         return false

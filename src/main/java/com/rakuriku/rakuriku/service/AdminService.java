@@ -6,14 +6,12 @@ import com.rakuriku.rakuriku.entities.AdminEntity;
 import com.rakuriku.rakuriku.repository.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javassist.tools.web.BadHttpRequest;
-import net.bytebuddy.implementation.bytecode.Throw;
 
 @Service
 public class AdminService {
@@ -33,7 +31,13 @@ public class AdminService {
     }
 
     public AdminEntity getLoginAdminUser(String userId, String password) throws BadHttpRequest {
+        if (userId.isEmpty() || password.isEmpty()) {
+            return null;
+        }
         AdminEntity admin = getAdminUser(userId);
+        if (admin == null) {
+            return null;
+        }
         if (encoder.matches(password, admin.getPassword())) {
             return admin;
         } else {

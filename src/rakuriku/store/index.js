@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export const state = () => ({
   id: null
 });
@@ -30,9 +29,11 @@ export const actions = {
             password: authData.password
           }
         )
-        .then(() => {
-          debugger
+        .then((response) => {
+          localStorage.setItem('token', response.headers['x-auth-token']);
             commit('updateId', authData.userId);
+        }).catch((error) => {
+          console.log("認証エラー");
         });
     },
     logout({ commit }) {
@@ -41,6 +42,7 @@ export const actions = {
           'api/logout'
         )
         .then(() => {
+          localStorage.removeItem('token');
           commit('resetData');
         });
     },

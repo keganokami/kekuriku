@@ -32,28 +32,4 @@ public class AdminEntity {
 
     @Column(name = "role")
     private String role;
-
-    // @JsonIgnore
-    // // ユーザアカウントが満了されているかの設定
-    // private boolean accountNonExpired;
-    // @JsonIgnore
-    // // ユーザアカウントがロックされているかの設定
-    // private boolean accountNonLocked;
-    // @JsonIgnore
-    // // ユーザアカウントのクレデンシャルが満了されているかの設定
-    // private boolean credentialsNonExpired;
-    // @JsonIgnore
-    // ユーザアカウントが活性化されているかの設定
-    // private boolean enabled;
-    // @JsonIgnore
-    // 認可のためのユーザのロール
-
-    // // @ElementCollection(fetch = FetchType.EAGER)
-    // private List<String> role = new ArrayList<>();
-    // @JsonIgnore
-    // // ユーザの認可情報を取得する
-    // public Collection<? extends GrantedAuthority> getAuthorities() {
-    // return
-    // this.role.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toUnmodifiableList());
-    // }
 }

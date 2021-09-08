@@ -8,9 +8,9 @@ export default {
   },
 
   router: {
-    middleware: 'auth-gard'
+    middleware: ['auth-gard'],
+    
   },
-  
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -36,6 +36,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/request-headers.ts' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -87,6 +88,6 @@ export default {
     '/api/': {
       target: 'http://localhost:8080',
       headers: { 'X-Forwarded-Host': 'localhost:3000' }
-    } 
+    }
   }
 }
