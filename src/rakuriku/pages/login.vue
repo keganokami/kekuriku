@@ -2,14 +2,15 @@
 <template>
     <div>
       <template v-if="!this.$store.getters.isAuthenticated">
-        <input type="text" v-model="id">
-        <input type="password" v-model="password">
+        userId: <input  style="border: 1px solid black" type="text" v-model="id">
+        password: <input style="border: 1px solid black" type="password" v-model="password">
         <button @click="login">ログイン</button>
       </template>
       <template v-if="$store.getters.isAuthenticated">
         <p>{{$store.getters.id}}さん</p>
-        <button @click="logout">ログアウト</button>
+       
       </template>
+       <button @click="logout">ログアウト</button>
     </div>
 </template>
  
