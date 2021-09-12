@@ -1,9 +1,9 @@
-package com.rakuriku.rakuriku.service;
+package com.rakuriku.rakuriku.service.auth;
 
 import java.util.List;
 
-import com.rakuriku.rakuriku.entities.AdminEntity;
-import com.rakuriku.rakuriku.repository.AdminRepository;
+import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.repository.auth.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,11 +15,15 @@ import javassist.tools.web.BadHttpRequest;
 
 @Service
 public class AdminService {
-    @Autowired
-    private AdminRepository repo;
+    private final AdminRepository repo;
 
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    public AdminService(AdminRepository repo) {
+        this.repo = repo;
+    }
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -47,5 +51,9 @@ public class AdminService {
 
     public AdminEntity getAdminUser(final String userId) {
         return repo.findByUserid(userId);
+    }
+
+    public void RegisterAdmin(AdminEntity admin) {
+        repo.save(admin);
     }
 }

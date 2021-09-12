@@ -1,12 +1,16 @@
-package com.rakuriku.rakuriku.controller;
+package com.rakuriku.rakuriku.controller.auth;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
-import com.rakuriku.rakuriku.entities.AdminEntity;
-import com.rakuriku.rakuriku.request.LoginRequest;
-import com.rakuriku.rakuriku.service.AdminService;
+import com.rakuriku.rakuriku.controller.JWTProvider;
+import com.rakuriku.rakuriku.controller.auth.request.AuthFactory;
+import com.rakuriku.rakuriku.controller.auth.request.LoginRequest;
+import com.rakuriku.rakuriku.controller.auth.request.RegisterRequest;
+import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.service.auth.AdminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +29,24 @@ public class AdminController {
 	// トークンを作成するためのProvider
 	private final JWTProvider provider;
 
+	private final AuthFactory authFactory;
+
 	@Autowired
-	public AdminController(AdminService service, JWTProvider provider) {
+	public AdminController(AdminService service, JWTProvider provider ,AuthFactory authFactory) {
 		this.service = service;
 		this.provider = provider;
+		this.authFactory = authFactory;
 	}
+
+	@Transactional
+	@PostMapping("/register")
+	public void postMethodName(@RequestBody RegisterRequest request, HttpServletResponse response) {
+		AdminEntity newAdmin = authFactory.createAdminEntityForRegister(request);
+		service.RegisterAdmin(newAdmin);
+		response.setHeader("X-AUTH-TOKEN", this.provider.createToken(newAdmin));
+		response.setStatus(HttpStatus.OK.value());
+	}
+	
 
 	// Formデータでクレデンシャルをもらい、認証を行う
 	@PostMapping("/login")

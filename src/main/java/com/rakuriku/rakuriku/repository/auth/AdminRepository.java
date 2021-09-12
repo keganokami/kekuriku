@@ -1,6 +1,6 @@
-package com.rakuriku.rakuriku.repository;
+package com.rakuriku.rakuriku.repository.auth;
 
-import com.rakuriku.rakuriku.entities.AdminEntity;
+import com.rakuriku.rakuriku.entities.auth.AdminEntity;
 
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;

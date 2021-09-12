@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 // ログイン処理ようのURLには認証認可なしでアクセスできる
                 .antMatchers("/").permitAll().antMatchers("/api/login").permitAll().antMatchers("/resources/**")
-                .permitAll().antMatchers("/api/**").authenticated().and()
+                .permitAll().antMatchers("/api/register").permitAll().antMatchers("/**").authenticated().and()
                 // デフォルトのFilter設定を変える
                 .addFilterBefore(this.filter, UsernamePasswordAuthenticationFilter.class);
         ;

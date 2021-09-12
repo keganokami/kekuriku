@@ -6,8 +6,8 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.rakuriku.rakuriku.entities.AdminEntity;
-import com.rakuriku.rakuriku.service.AdminService;
+import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.service.auth.AdminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
