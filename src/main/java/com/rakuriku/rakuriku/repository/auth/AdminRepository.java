@@ -1,14 +1,13 @@
 package com.rakuriku.rakuriku.repository.auth;
 
-import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
-    AdminEntity findByUserid(String userid);
+public interface AdminRepository extends JpaRepository<AdminsEntity, Integer> {
+    AdminsEntity findByUserId(String userId);
 
-    AdminEntity findByUseridAndPassword(String userId, String password);
+    AdminsEntity findByUserIdAndPassword(String userId, String password);
 }

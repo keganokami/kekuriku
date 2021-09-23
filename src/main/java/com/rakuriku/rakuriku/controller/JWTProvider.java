@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 import com.rakuriku.rakuriku.service.auth.AdminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +39,8 @@ public class JWTProvider {
     }
 
     // adminオブジェクトからJWTを作成する
-    public String createToken(AdminEntity admin) {
-        Claims claims = Jwts.claims().setSubject(admin.getUserid());
+    public String createToken(AdminsEntity admin) {
+        Claims claims = Jwts.claims().setSubject(admin.getUserId());
         claims.put("roles", admin.getRole());
 
         Date iat = new Date();
@@ -52,7 +52,7 @@ public class JWTProvider {
 
     // トークンからユーザ情報を取得する
     public Authentication getAuthentication(final String token) {
-        final AdminEntity userDetails = this.service.getAdminUser(this.getSubject(token));
+        final AdminsEntity userDetails = this.service.getAdminUser(this.getSubject(token));
         // admin権限しか登録しないので、ユーザーが見つかれば認証成功とする
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(userDetails.getRole()));

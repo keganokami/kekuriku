@@ -9,7 +9,7 @@ import com.rakuriku.rakuriku.controller.JWTProvider;
 import com.rakuriku.rakuriku.controller.auth.request.AuthFactory;
 import com.rakuriku.rakuriku.controller.auth.request.LoginRequest;
 import com.rakuriku.rakuriku.controller.auth.request.RegisterRequest;
-import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 import com.rakuriku.rakuriku.service.auth.AdminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class AdminController {
 	@Transactional
 	@PostMapping("/register")
 	public void postMethodName(@RequestBody RegisterRequest request, HttpServletResponse response) {
-		AdminEntity newAdmin = authFactory.createAdminEntityForRegister(request);
+		AdminsEntity newAdmin = authFactory.createAdminEntityForRegister(request);
 		service.RegisterAdmin(newAdmin);
 		response.setHeader("X-AUTH-TOKEN", this.provider.createToken(newAdmin));
 		response.setStatus(HttpStatus.OK.value());
@@ -52,7 +52,7 @@ public class AdminController {
 	@PostMapping("/login")
 	public void login(@Validated @RequestBody LoginRequest form, HttpServletResponse response) throws IOException {
 		// クレデンシャルからユーザ情報を取得
-		AdminEntity admin;
+		AdminsEntity admin;
 		try {
 			admin = this.service.getLoginAdminUser(form.getUserId(), form.getPassword());
 			

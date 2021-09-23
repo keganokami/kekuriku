@@ -2,7 +2,7 @@ package com.rakuriku.rakuriku.service.auth;
 
 import java.util.List;
 
-import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 import com.rakuriku.rakuriku.repository.auth.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +30,15 @@ public class AdminService {
         return new BCryptPasswordEncoder();
     }
 
-    public List<AdminEntity> getAll() {
+    public List<AdminsEntity> getAll() {
         return repo.findAll();
     }
 
-    public AdminEntity getLoginAdminUser(String userId, String password) throws BadHttpRequest {
+    public AdminsEntity getLoginAdminUser(String userId, String password) throws BadHttpRequest {
         if (userId.isEmpty() || password.isEmpty()) {
             return null;
         }
-        AdminEntity admin = getAdminUser(userId);
+        AdminsEntity admin = getAdminUser(userId);
         if (admin == null) {
             return null;
         }
@@ -49,11 +49,11 @@ public class AdminService {
         }
     }
 
-    public AdminEntity getAdminUser(final String userId) {
-        return repo.findByUserid(userId);
+    public AdminsEntity getAdminUser(final String userId) {
+        return repo.findByUserId(userId);
     }
 
-    public void RegisterAdmin(AdminEntity admin) {
+    public void RegisterAdmin(AdminsEntity admin) {
         repo.save(admin);
     }
 }

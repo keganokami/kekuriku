@@ -2,14 +2,11 @@ package com.rakuriku.rakuriku.controller.test;
 
 import java.util.List;
 
-import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 import com.rakuriku.rakuriku.service.auth.AdminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,7 +19,7 @@ public class TestController {
     }
 
     @GetMapping("/test")
-    public List<AdminEntity> adminEntity() {
+    public List<AdminsEntity> adminEntity() {
         
        return service.getAll();
     }

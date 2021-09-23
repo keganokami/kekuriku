@@ -13,9 +13,21 @@
 	<name>rakuriku</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+		<hibernate-tools.destdir>${project.build.directory}/generated-sources/hibernate-tools</hibernate-tools.destdir>
 		<java.version>11</java.version>
+		<db.jdbc.groupId>org.postgresql</db.jdbc.groupId>
+		<db.jdbc.artifactId>postgresql</db.jdbc.artifactId>
+		<db.jdbc.driver>org.postgresql.Driver</db.jdbc.driver>
+		<db.jdbc.url>jdbc:postgresql://db:5432/dev</db.jdbc.url>
+		<db.username>dev</db.username>
+		<db.password>devpass</db.password>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -42,7 +54,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
+			<version>42.2.23</version>
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
@@ -66,6 +78,11 @@
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-tools</artifactId>
+			<version>5.5.7.Final</version>
 		</dependency>
 	</dependencies>
 
@@ -130,4 +147,67 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>reveng</id>
+
+			<dependencies>
+				<dependency>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-tools</artifactId>
+					<version>5.3.9.Final</version>
+				</dependency>
+				<dependency>
+					<groupId>${db.jdbc.groupId}</groupId>
+					<artifactId>${db.jdbc.artifactId}</artifactId>
+				</dependency>
+
+			</dependencies>
+
+			<build>
+				<defaultGoal>clean compile antrun:run</defaultGoal>
+
+				<resources>
+					<resource>
+						<directory>src/tools/resources</directory>
+						<filtering>true</filtering>
+						<targetPath>${project.build.directory}</targetPath>
+					</resource>
+				</resources>
+
+				<plugins>
+
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<configuration>
+							<target>
+								<property name="maven.compile.classpath" refid="maven.compile.classpath" />
+								<ant antfile="${project.basedir}/src/main/resources/build.xml" />
+							</target>
+						</configuration>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>3.2.0</version>
+						<executions>
+							<execution>
+								<id>add-tools-source</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src/tools/java</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

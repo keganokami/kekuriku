@@ -1,12 +1,12 @@
 package com.rakuriku.rakuriku.controller.auth.request;
 
-import com.rakuriku.rakuriku.entities.auth.AdminEntity;
+import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class AuthFactory {
-    public AdminEntity createAdminEntityForRegister(RegisterRequest request) {
-        return new AdminEntity(request.getUserId(), request.getPassword(), request.getEmailAddress(), "admin");
+    public AdminsEntity createAdminEntityForRegister(RegisterRequest request) {
+        return new AdminsEntity(request.getUserId(), request.getPassword(), request.getEmailAddress(), "admin");
     }
 }
