@@ -1,40 +1,75 @@
-
 <template>
-    <div>
-      <template v-if="!this.$store.getters.isAuthenticated">
-        userId: <input  style="border: 1px solid black" type="text" v-model="id">
-        password: <input style="border: 1px solid black" type="password" v-model="password">
-        <button @click="login">ログイン</button>
-      </template>
-      <template v-if="$store.getters.isAuthenticated">
-        <p>{{$store.getters.id}}さん</p>
-       
-      </template>
-       <button @click="logout">ログアウト</button>
-    </div>
+  <v-row
+    class="login-card flex-column"
+    height="100%"
+    justify="center"
+    align-content="center"
+  >
+    <v-card height="400" max-width="670">
+      <v-card-title class="justify-center mt-7">
+        <h2>ログイン</h2>
+      </v-card-title>
+      <v-card-text class="d-flex flex-column justify-center align-center mt-7">
+        <div class="signin-form mb-4">
+          <v-text-field label="RakurikuID" outlined></v-text-field>
+        </div>
+        <div class="signin-form">
+          <v-text-field
+            label="Password"
+            outlined
+            :type="isHiddenPassword ? 'text' : 'password'"
+          ></v-text-field>
+        </div>
+        <v-card-actions>
+          <v-btn dark width="96" color="#4169e1">
+            ログイン
+          </v-btn>
+        </v-card-actions>
+      </v-card-text>
+    </v-card>
+    <v-card height="254" width="670" class="mt-10">
+      <v-card-title class="flex-column mt-7">
+        <h2>新規登録</h2>
+        <p class="mt-8"><span>※</span>ログインには会員登録が必要です。</p>
+      </v-card-title>
+      <v-card-text class="d-flex justify-center">
+        <v-card-actions>
+          <v-btn dark width="170" color="#4169e1">
+            新規登録
+          </v-btn>
+        </v-card-actions>
+      </v-card-text>
+    </v-card>
+  </v-row>
 </template>
- 
- 
+
 <script>
 export default {
   data() {
     return {
-      id: '',
-      password: '',
+      id: "",
+      password: "",
+      isHiddenPassword: false
     };
   },
   methods: {
-    login() {
-      this.$store.dispatch('login', {
+    async login() {
+      await this.$store.dispatch("login", {
         userId: this.id,
         password: this.password
       });
-      // this.id = '';
-      // this.password = '';
-    },
-    logout() {
-      this.$store.dispatch('logout');
-    },
+    }
   }
 };
 </script>
+
+<style scoped>
+.login-card {
+  /* 背景色は決まり次第変更 */
+  background-color: rgba(66, 175, 237, 0.96);
+}
+
+.signin-form {
+  width: 328px;
+}
+</style>
