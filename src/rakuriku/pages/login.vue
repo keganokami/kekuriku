@@ -11,19 +11,24 @@
       </v-card-title>
       <v-card-text class="d-flex flex-column justify-center align-center mt-7">
         <div class="signin-form mb-4">
-          <v-text-field label="RakurikuID" outlined></v-text-field>
+          <v-text-field label="RakurikuID" outlined v-model="id"></v-text-field>
         </div>
         <div class="signin-form">
           <v-text-field
             label="Password"
             outlined
+            :append-icon="isHiddenPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="isHiddenPassword ? 'text' : 'password'"
+            @click:append="isHiddenPassword = !isHiddenPassword"
+            v-model="password"
           ></v-text-field>
         </div>
         <v-card-actions>
-          <v-btn dark width="96" color="#4169e1">
-            ログイン
-          </v-btn>
+          <NuxtLink to="#">
+            <v-btn dark width="96" color="#4169e1">
+              ログイン
+            </v-btn>
+          </NuxtLink>
         </v-card-actions>
       </v-card-text>
     </v-card>
@@ -34,9 +39,11 @@
       </v-card-title>
       <v-card-text class="d-flex justify-center">
         <v-card-actions>
-          <v-btn dark width="170" color="#4169e1">
-            新規登録
-          </v-btn>
+          <NuxtLink to="/signup">
+            <v-btn dark width="170" color="#4169e1">
+              新規登録
+            </v-btn>
+          </NuxtLink>
         </v-card-actions>
       </v-card-text>
     </v-card>
