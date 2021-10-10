@@ -5,37 +5,43 @@
         <h2>新規登録</h2>
       </v-card-title>
       <div class="flex-column d-flex justify-center align-center mt-7">
-        <div class="signup-form mb-5">
-          <v-text-field label="らくりくID" outlined v-model="id"></v-text-field>
-        </div>
-        <div class="signup-form mb-5">
-          <v-text-field
-            type="email"
-            label="メールアドレス"
-            outlined
-            v-model="email"
-            append-icon="mdi-email"
-          ></v-text-field>
-        </div>
-        <div class="signup-form mb-5">
-          <v-text-field
-            label="パスワード"
-            outlined
-            :append-icon="isMaskingPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="isMaskingPassword ? 'text' : 'password'"
-            @click:append="isMaskingPassword = !isMaskingPassword"
-            v-model="password"
-          ></v-text-field>
-        </div>
-        <div class="signup-form mb-2">
-          <v-text-field
-            label="パスワード確認"
-            outlined
-            :append-icon="isMaskingconfirmation ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="isMaskingconfirmation ? 'text' : 'password'"
-            @click:append="isMaskingconfirmation = !isMaskingconfirmation"
-            v-model="confirmation"
-          ></v-text-field>
+        <div class="signup-form">
+          <div class="mb-5">
+            <v-text-field
+              label="らくりくID"
+              outlined
+              v-model="id"
+            ></v-text-field>
+          </div>
+          <div class="mb-5">
+            <v-text-field
+              type="email"
+              label="メールアドレス"
+              outlined
+              v-model="email"
+              append-icon="mdi-email"
+            ></v-text-field>
+          </div>
+          <div class="mb-5">
+            <v-text-field
+              label="パスワード"
+              outlined
+              :append-icon="isMaskingPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="isMaskingPassword ? 'text' : 'password'"
+              @click:append="isMaskingPassword = !isMaskingPassword"
+              v-model="password"
+            ></v-text-field>
+          </div>
+          <div class="mb-2">
+            <v-text-field
+              label="パスワード確認"
+              outlined
+              :append-icon="isMaskingconfirmation ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="isMaskingconfirmation ? 'text' : 'password'"
+              @click:append="isMaskingconfirmation = !isMaskingconfirmation"
+              v-model="confirmation"
+            ></v-text-field>
+          </div>
         </div>
         <v-card-actions>
           <NuxtLink to="#">
@@ -76,6 +82,6 @@ export default class Signup extends Vue {
 }
 
 .signup-form {
-  width: 328px;
+  width: 20rem;
 }
 </style>
