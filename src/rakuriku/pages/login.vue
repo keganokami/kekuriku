@@ -12,9 +12,9 @@
           <v-text-field
             label="Password"
             outlined
-            :append-icon="isHiddenPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="isHiddenPassword ? 'text' : 'password'"
-            @click:append="isHiddenPassword = !isHiddenPassword"
+            :append-icon="isMaskingPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="isMaskingPassword ? 'text' : 'password'"
+            @click:append="isMaskingPassword = !isMaskingPassword"
             v-model="password"
           ></v-text-field>
         </div>
@@ -50,7 +50,7 @@ import { Component, Vue} from 'nuxt-property-decorator';
 export default class Login extends Vue {
   id = "";
   password = "";
-  isHiddenPassword = false;
+  isMaskingPassword = false;
   $store: any;
 
   async login() {

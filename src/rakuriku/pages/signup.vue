@@ -21,9 +21,9 @@
           <v-text-field
             label="パスワード"
             outlined
-            :append-icon="isHiddenPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="isHiddenPassword ? 'text' : 'password'"
-            @click:append="isHiddenPassword = !isHiddenPassword"
+            :append-icon="isMaskingPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="isMaskingPassword ? 'text' : 'password'"
+            @click:append="isMaskingPassword = !isMaskingPassword"
             v-model="password"
           ></v-text-field>
         </div>
@@ -31,10 +31,10 @@
           <v-text-field
             label="パスワード確認"
             outlined
-            :append-icon="isHiddenPasswordCheck ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="isHiddenPasswordCheck ? 'text' : 'password'"
-            @click:append="isHiddenPasswordCheck = !isHiddenPasswordCheck"
-            v-model="passwordCheck"
+            :append-icon="isMaskingconfirmation ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="isMaskingconfirmation ? 'text' : 'password'"
+            @click:append="isMaskingconfirmation = !isMaskingconfirmation"
+            v-model="confirmation"
           ></v-text-field>
         </div>
         <v-card-actions>
@@ -57,9 +57,9 @@ export default class Signup extends Vue {
   id = "";
   email = "";
   password = "";
-  passwordCheck = "";
-  isHiddenPassword = false;
-  isHiddenPasswordCheck = false;
+  confirmation = "";
+  isMaskingPassword = false;
+  isMaskingconfirmation = false;
 
   signup() {
     /* ユーザー登録処理 */
