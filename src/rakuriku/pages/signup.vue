@@ -14,6 +14,7 @@
             label="メールアドレス"
             outlined
             v-model="email"
+            append-icon="mdi-email"
           ></v-text-field>
         </div>
         <div class="signup-form mb-5">
