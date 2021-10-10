@@ -37,14 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.logout().logoutUrl("/api/logout").deleteCookies("X-AUTH-TOKEN").invalidateHttpSession(true)
+        http.logout().logoutUrl("/management-account/logout").deleteCookies("X-AUTH-TOKEN").invalidateHttpSession(true)
                 .logoutSuccessHandler((req, res, auth) -> res.setStatus(HttpServletResponse.SC_OK));
 
         http.httpBasic().disable().csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 // ログイン処理ようのURLには認証認可なしでアクセスできる
-                .antMatchers("/").permitAll().antMatchers("/api/login").permitAll().antMatchers("/resources/**")
-                .permitAll().antMatchers("/api/register").permitAll().antMatchers("/**").authenticated().and()
+                .antMatchers("/").permitAll().antMatchers("/management-account/login").permitAll().antMatchers("/resources/**")
+                .permitAll().antMatchers("/management-account/new").permitAll().antMatchers("/**").authenticated().and()
                 // デフォルトのFilter設定を変える
                 .addFilterBefore(this.filter, UsernamePasswordAuthenticationFilter.class);
         ;

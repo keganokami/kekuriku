@@ -23,7 +23,7 @@ export const actions = {
     login({ commit }, authData) {
       axios
         .post(
-          'api/login',
+          'management-account/login',
           {
             userId: authData.userId,
             password: authData.password
@@ -39,7 +39,7 @@ export const actions = {
     logout({ commit }) {
       axios
         .post(
-          'api/logout'
+          'management-account/logout'
         )
         .then(() => {
           localStorage.removeItem('token');

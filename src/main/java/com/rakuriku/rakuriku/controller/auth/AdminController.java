@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javassist.tools.web.BadHttpRequest;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/management-account")
 public class AdminController {
 	private final AdminService service;
 	// トークンを作成するためのProvider
@@ -39,7 +39,7 @@ public class AdminController {
 	}
 
 	@Transactional
-	@PostMapping("/register")
+	@PostMapping("/new")
 	public void postMethodName(@RequestBody RegisterRequest request, HttpServletResponse response) {
 		AdminsEntity newAdmin = authFactory.createAdminEntityForRegister(request);
 		service.RegisterAdmin(newAdmin);
@@ -65,7 +65,7 @@ public class AdminController {
 			response.setHeader("X-AUTH-TOKEN", this.provider.createToken(admin));
 			response.setStatus(HttpStatus.OK.value());
 		} catch (BadHttpRequest e) {
-			response.sendError(500, "認証エラー" + e);
+			response.sendError(404, "認証エラー" + e);
 		}
 
 	}
