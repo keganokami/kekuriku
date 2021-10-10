@@ -9,7 +9,6 @@ export default {
 
   router: {
     middleware: ['auth-gard'],
-    
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -17,7 +16,12 @@ export default {
     titleTemplate: '%s - rakuriku',
     title: 'rakuriku',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
+    },
+    pwa: {
+      manifest: {
+        lang: 'ja',
+      },
     },
     meta: [
       { charset: 'utf-8' },
@@ -63,20 +67,6 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    // theme: {
-    //   dark: true,
-    //   themes: {
-    //     dark: {
-    //       primary: colors.blue.darken2,
-    //       accent: colors.grey.darken3,
-    //       secondary: colors.amber.darken3,
-    //       info: colors.teal.lighten1,
-    //       warning: colors.amber.base,
-    //       error: colors.deepOrange.accent4,
-    //       success: colors.green.accent3
-    //     }
-    //   }
-    // }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -84,7 +74,11 @@ export default {
   },
 
   proxy: {
-    '/api/': {
+    '/management-account/': {
+      target: 'http://localhost:8080',
+      headers: { 'X-Forwarded-Host': 'localhost:3000' }
+    },
+    '/auth/': {
       target: 'http://localhost:8080',
       headers: { 'X-Forwarded-Host': 'localhost:3000' }
     }
