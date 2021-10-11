@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import com.rakuriku.rakuriku.controller.JWTProvider;
 import com.rakuriku.rakuriku.controller.auth.request.AuthFactory;
 import com.rakuriku.rakuriku.controller.auth.request.LoginRequest;
-import com.rakuriku.rakuriku.controller.auth.request.RegisterRequest;
+import com.rakuriku.rakuriku.controller.auth.request.SignUpRequest;
 import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 import com.rakuriku.rakuriku.service.auth.AdminService;
 
@@ -40,18 +40,17 @@ public class AdminController {
 
 	@Transactional
 	@PostMapping("/new")
-	public void postMethodName(@RequestBody RegisterRequest request, HttpServletResponse response) {
+	public void postMethodName(@RequestBody SignUpRequest request, HttpServletResponse response) {
 		AdminsEntity newAdmin = authFactory.createAdminEntityForRegister(request);
-		service.RegisterAdmin(newAdmin);
+		service.signUpAdmin(newAdmin);
 		response.setHeader("X-AUTH-TOKEN", this.provider.createToken(newAdmin));
 		response.setStatus(HttpStatus.OK.value());
 	}
 	
-
-	// Formデータでクレデンシャルをもらい、認証を行う
 	@PostMapping("/login")
 	public void login(@Validated @RequestBody LoginRequest form, HttpServletResponse response) throws IOException {
-		// クレデンシャルからユーザ情報を取得
+		// TODO サービスでUserNotFoundExceptionを作成してエラーをレスポンスするように修正する
+		// TODO try catchを消したい。
 		AdminsEntity admin;
 		try {
 			admin = this.service.getLoginAdminUser(form.getUserId(), form.getPassword());
