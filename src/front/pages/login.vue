@@ -19,7 +19,7 @@
           ></v-text-field>
         </div>
         <v-card-actions>
-          <NuxtLink to="#">
+          <NuxtLink to="auth/top">
             <v-btn dark width="96" color="#4169e1" @click="login()"> ログイン </v-btn>
           </NuxtLink>
         </v-card-actions>
