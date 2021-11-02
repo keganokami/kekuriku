@@ -53,7 +53,9 @@ public class AdminService {
         return repo.findByUserId(userId);
     }
 
-    public void RegisterAdmin(AdminsEntity admin) {
+    public void signUpAdmin(AdminsEntity admin) {
+        // TODO 登録用DTOを作って、エンティティとマッピングさせる中でエンコードするようにしたい。
+        admin.setPassword(encoder.encode(admin.getPassword()));
         repo.save(admin);
     }
 }
