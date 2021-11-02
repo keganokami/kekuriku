@@ -14,17 +14,10 @@
     "_name": "_b20ba866"
   },
   {
-    "name": "auth-inspire",
-    "path": "/auth/inspire",
-    "component": "/root/rakuriku/src/front/pages/auth/inspire.vue",
-    "chunkName": "pages/auth/inspire",
-    "_name": "_042030e8"
-  },
-  {
-    "name": "auth-top",
-    "path": "/auth/top",
-    "component": "/root/rakuriku/src/front/pages/auth/top/index.vue",
-    "chunkName": "pages/auth/top/index",
-    "_name": "_ef7af5b4"
+    "name": "auth-sample",
+    "path": "/auth/sample",
+    "component": "/root/rakuriku/src/front/pages/auth/sample.vue",
+    "chunkName": "pages/auth/sample",
+    "_name": "_add957e8"
   }
 ]
