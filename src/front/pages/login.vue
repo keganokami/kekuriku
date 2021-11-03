@@ -19,9 +19,7 @@
           ></v-text-field>
         </div>
         <v-card-actions>
-          <NuxtLink to="#">
             <v-btn dark width="96" color="#4169e1" @click="login()"> ログイン </v-btn>
-          </NuxtLink>
         </v-card-actions>
       </div>
     </v-card>
@@ -52,6 +50,7 @@ export default class Login extends Vue {
   password = "";
   isMaskingPassword = false;
   $store: any;
+  $router: any;
 
   async login() {
     await this.$store.dispatch("login", {

@@ -32,6 +32,7 @@ export const actions = {
         .then((response) => {
           localStorage.setItem('token', response.headers['x-auth-token']);
             commit('updateId', authData.userId);
+            this.$router.push('/auth/dashboard');
         }).catch((error) => {
           console.log("認証エラー");
         });

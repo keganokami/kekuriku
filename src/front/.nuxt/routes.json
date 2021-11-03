@@ -14,10 +14,10 @@
     "_name": "_b20ba866"
   },
   {
-    "name": "auth-sample",
-    "path": "/auth/sample",
-    "component": "/root/rakuriku/src/front/pages/auth/sample.vue",
-    "chunkName": "pages/auth/sample",
-    "_name": "_add957e8"
+    "name": "auth-dashboard",
+    "path": "/auth/dashboard",
+    "component": "/root/rakuriku/src/front/pages/auth/dashboard.vue",
+    "chunkName": "pages/auth/dashboard",
+    "_name": "_27c7f622"
   }
 ]
