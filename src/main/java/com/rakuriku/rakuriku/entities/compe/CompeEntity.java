@@ -20,6 +20,9 @@ import javax.persistence.Table;
 @Table(name="compe"
     ,schema="public"
 )
+@TypeDefs({
+    @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+})
 public class CompeEntity extends BaseEntity implements java.io.Serializable {
 
 
@@ -115,8 +118,8 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
         this.compeGuidelinesFile = compeGuidelinesFile;
     }
 
-    
-    @Column(name="compe_event", nullable=false)
+    @Type(type = "jsonb")
+    @Column(name="compe_event", nullable=false, columnDefinition = "jsonb")
     public Serializable getCompeEvent() {
         return this.compeEvent;
     }

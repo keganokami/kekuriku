@@ -84,6 +84,11 @@
 			<artifactId>hibernate-tools</artifactId>
 			<version>5.5.7.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>2.3.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -4,9 +4,7 @@ cd ..
 
 apt-get install npm
 apt-get install nodejs
-`npm i npm@latest -g` \
-`npm install -g n` \
-` n latest` \
+`n lts` \
 
 npm -v /
 node -v /
