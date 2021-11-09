@@ -1,17 +1,14 @@
-package com.rakuriku.rakuriku.controller.auth;
+package com.rakuriku.rakuriku.presentation.controller.auth;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
-
-import com.rakuriku.rakuriku.controller.JWTProvider;
-import com.rakuriku.rakuriku.controller.auth.request.AuthFactory;
-import com.rakuriku.rakuriku.controller.auth.request.LoginRequest;
-import com.rakuriku.rakuriku.controller.auth.request.SignUpRequest;
+import com.rakuriku.rakuriku.app.service.auth.AdminService;
 import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
-import com.rakuriku.rakuriku.service.auth.AdminService;
-
+import com.rakuriku.rakuriku.presentation.controller.JWTProvider;
+import com.rakuriku.rakuriku.presentation.controller.auth.request.AuthFactory;
+import com.rakuriku.rakuriku.presentation.controller.auth.request.LoginRequest;
+import com.rakuriku.rakuriku.presentation.controller.auth.request.SignUpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javassist.tools.web.BadHttpRequest;
 
 @Controller

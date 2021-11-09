@@ -1,4 +1,4 @@
-package com.rakuriku.rakuriku.controller;
+package com.rakuriku.rakuriku.presentation.controller;
 
 import java.io.IOException;
 

@@ -1,9 +1,12 @@
 package com.rakuriku.rakuriku.entities.compe;
 // Generated Nov 3, 2021, 7:07:13 AM by Hibernate Tools 5.3.9.Final
 
-
+import org.hibernate.annotations.Type;
+import com.rakuriku.rakuriku.entities.BaseEntity;
 import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
-import io.sitoolkit.dba.infra.jpa.BaseEntity;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -127,10 +130,6 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
     public void setCompeEvent(Serializable compeEvent) {
         this.compeEvent = compeEvent;
     }
-
-
-
-
 }
 
 

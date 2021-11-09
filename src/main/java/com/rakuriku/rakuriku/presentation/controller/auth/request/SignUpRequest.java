@@ -1,4 +1,4 @@
-package com.rakuriku.rakuriku.controller.auth.request;
+package com.rakuriku.rakuriku.presentation.controller.auth.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

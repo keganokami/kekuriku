@@ -2,8 +2,8 @@ package com.rakuriku.rakuriku.entities.auth;
 // Generated Nov 3, 2021, 7:07:13 AM by Hibernate Tools 5.3.9.Final
 
 
+import com.rakuriku.rakuriku.entities.BaseEntity;
 import com.rakuriku.rakuriku.entities.compe.CompeEntity;
-import io.sitoolkit.dba.infra.jpa.BaseEntity;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;

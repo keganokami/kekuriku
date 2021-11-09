@@ -1,4 +1,4 @@
-package com.rakuriku.rakuriku.controller;
+package com.rakuriku.rakuriku.presentation.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
