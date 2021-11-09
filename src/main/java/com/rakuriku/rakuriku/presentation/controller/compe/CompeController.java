@@ -1,6 +1,6 @@
 package com.rakuriku.rakuriku.presentation.controller.compe;
 
-import com.rakuriku.rakuriku.app.service.compe.CompeService;
+import com.rakuriku.rakuriku.domain.service.compe.CompeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

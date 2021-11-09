@@ -1,4 +1,4 @@
-package com.rakuriku.rakuriku.app.service.auth;
+package com.rakuriku.rakuriku.domain.service.auth;
 
 import java.util.List;
 import com.rakuriku.rakuriku.domain.repository.auth.AdminRepository;

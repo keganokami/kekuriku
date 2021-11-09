@@ -1,4 +1,7 @@
-package com.rakuriku.rakuriku.repository.event;
+package com.rakuriku.rakuriku.domain.repository.event;
+
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor

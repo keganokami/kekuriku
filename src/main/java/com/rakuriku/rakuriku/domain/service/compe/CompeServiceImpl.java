@@ -1,4 +1,4 @@
-package com.rakuriku.rakuriku.app.service.compe;
+package com.rakuriku.rakuriku.domain.service.compe;
 
 import com.rakuriku.rakuriku.entities.compe.CompeEntity;
 import com.rakuriku.rakuriku.repository.compe.CompeRepository;

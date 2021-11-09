@@ -3,18 +3,21 @@
     "name": "login",
     "path": "/login",
     "component": "/root/rakuriku/src/front/pages/login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_4d3ef9c4"
   },
   {
     "name": "signup",
     "path": "/signup",
     "component": "/root/rakuriku/src/front/pages/signup.vue",
-    "chunkName": "pages/signup"
+    "chunkName": "pages/signup",
+    "_name": "_b20ba866"
   },
   {
     "name": "auth-dashboard",
     "path": "/auth/dashboard",
     "component": "/root/rakuriku/src/front/pages/auth/dashboard.vue",
-    "chunkName": "pages/auth/dashboard"
+    "chunkName": "pages/auth/dashboard",
+    "_name": "_27c7f622"
   }
 ]

@@ -1,4 +1,4 @@
-package com.rakuriku.rakuriku.presentation.controller;
+package com.rakuriku.rakuriku.infra;
 
 import javax.servlet.http.HttpServletResponse;
 
