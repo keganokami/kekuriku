@@ -1,8 +1,9 @@
 package com.rakuriku.rakuriku.domain.service.auth;
 
 import java.util.List;
+
+import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
 import com.rakuriku.rakuriku.domain.repository.auth.AdminRepository;
-import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

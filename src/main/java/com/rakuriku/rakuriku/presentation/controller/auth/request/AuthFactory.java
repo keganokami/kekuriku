@@ -1,6 +1,6 @@
 package com.rakuriku.rakuriku.presentation.controller.auth.request;
 
-import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
+import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
 
 import org.springframework.stereotype.Component;
 

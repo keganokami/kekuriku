@@ -1,4 +1,4 @@
-package com.rakuriku.rakuriku.entities;
+package com.rakuriku.rakuriku.domain.model;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,7 @@
 package com.rakuriku.rakuriku.domain.repository.auth;
 
-import com.rakuriku.rakuriku.entities.auth.AdminsEntity;
+import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
