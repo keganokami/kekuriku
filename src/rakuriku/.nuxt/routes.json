@@ -1,0 +1,16 @@
+[
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "/root/rakuriku/src/rakuriku/pages/inspire.vue",
+    "chunkName": "pages/inspire",
+    "_name": "_f19be644"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/root/rakuriku/src/rakuriku/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_329a5626"
+  }
+]
