@@ -6,7 +6,7 @@
       </v-card-title>
       <div class="flex-column d-flex justify-center align-center mt-7">
         <div class="signin-form mb-4">
-          <v-text-field label="RakurikuID" outlined v-model="id"></v-text-field>
+          <v-text-field label="RakurikuID" value="admin001" outlined v-model="id"></v-text-field>
         </div>
         <div class="signin-form">
           <v-text-field
@@ -16,6 +16,7 @@
             :type="isMaskingPassword ? 'text' : 'password'"
             @click:append="isMaskingPassword = !isMaskingPassword"
             v-model="password"
+            value="password"
           ></v-text-field>
         </div>
         <v-card-actions>
