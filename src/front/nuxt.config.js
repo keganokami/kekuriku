@@ -5,6 +5,7 @@ export default {
   ssr: false,
   generate: {
     dir: '../main/resources/static',
+    fallback: true
   },
 
   router: {
@@ -75,11 +76,11 @@ export default {
 
   proxy: {
     '/management-account/': {
-      target: 'http://localhost:8080',
+      target: 'http://sb:8080/',
       headers: { 'X-Forwarded-Host': 'localhost:3000' }
     },
-    '/auth/': {
-      target: 'http://localhost:8080',
+    '/api/': {
+      target: 'http://sb:8080/',
       headers: { 'X-Forwarded-Host': 'localhost:3000' }
     }
   }

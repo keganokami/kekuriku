@@ -1,12 +1,5 @@
 [
   {
-    "name": "login",
-    "path": "/login",
-    "component": "/root/rakuriku/src/front/pages/login.vue",
-    "chunkName": "pages/login",
-    "_name": "_4d3ef9c4"
-  },
-  {
     "name": "signup",
     "path": "/signup",
     "component": "/root/rakuriku/src/front/pages/signup.vue",
@@ -19,5 +12,19 @@
     "component": "/root/rakuriku/src/front/pages/auth/dashboard.vue",
     "chunkName": "pages/auth/dashboard",
     "_name": "_27c7f622"
+  },
+  {
+    "name": "auth-compe-list",
+    "path": "/auth/compe/list",
+    "component": "/root/rakuriku/src/front/pages/auth/compe/list.vue",
+    "chunkName": "pages/auth/compe/list",
+    "_name": "_11b22a8e"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/root/rakuriku/src/front/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_f8d152a6"
   }
 ]

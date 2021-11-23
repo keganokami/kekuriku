@@ -1,22 +1,38 @@
 
 <template>
-  <div>
+  <div class="d-flex flex-column pa-4 justify-center align-center">
     <h2>大会作成</h2>
-    <div class="d-flex flex-column">
-      <v-text-field label="大会名" outlined></v-text-field>
-      <v-text-field label="大会場所" outlined></v-text-field>
-      <v-text-field label="大会日時" outlined></v-text-field>
-      <v-file-input chips small-chips truncate-length="15">大会要項</v-file-input>
-		<v-data-table
-			v-model="selected"
-			:headers="headers"
-			:items="desserts"
-			:single-select="singleSelect"
-			item-key="name"
-			show-select
-			class="elevation-1"
-		/>
-    </div>
+    <form action="">
+      <div class="">
+        <v-text-field name="compe-name" label="大会名" outlined></v-text-field>
+        <v-text-field name="compe-place" label="大会場所" outlined></v-text-field>
+        <v-text-field name="compe-dates" label="大会日時" outlined></v-text-field>
+        <v-file-input name="compe-guidelines-file" chips small-chips truncate-length="15"
+          >大会要項</v-file-input
+        >
+        <!-- コンポーネントにして、カテゴリー分回す -->
+        <h3>短距離種目</h3>
+        <v-data-table
+          v-model="selected"
+          :headers="headers"
+          :items="compeEvents"
+          :single-select="singleSelect"
+          item-key="name"
+          show-select
+          class="elevation-1"
+        />
+      </div>
+      <v-btn
+        name="compe-create-btn"
+        class="justify-center align-center"
+        dark
+        type="submit"
+        width="170"
+        color="#4169e1"
+      >
+        作成
+      </v-btn>
+    </form>
   </div>
 </template>
  
@@ -24,33 +40,54 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 
+// TODO 移動
+export type Events = {
+  id: string,
+  name: string
+}
+
 @Component
 export default class DashBoard extends Vue {
+
+  compeName!: string;
+  compePlace!: string;
+  compeDates!: string;
+  compeGuidelinesFile!: File[];
+  compeEvents: Events[] = [
+    {
+      id: "001",
+      name: "男子100m",
+    },
+    {
+      id: "002",
+      name: "男子200m",
+    },
+    {
+      id: "003",
+      name: "男子300m",
+    },
+    {
+      id: "004",
+      name: "男子400m",
+    },
+  ];
+
+
   singleSelect = false;
   selected = [];
   headers = [
     {
-      text: "Dessert (100g serving)",
+      text: "id",
+      align: " d-none",
+      sortable: false,
+      value: "id",
+    },
+    {
+      text: "種目",
       align: "start",
       sortable: false,
-      value: "name"
+      value: "name",
     },
-    { text: "Calories", value: "calories" },
-    { text: "Fat (g)", value: "fat" },
-    { text: "Carbs (g)", value: "carbs" },
-    { text: "Protein (g)", value: "protein" },
-    { text: "Iron (%)", value: "iron" }
-  ];
-
-  desserts = [
-    {
-      name: "Frozen Yogurt",
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0,
-      iron: "1%",
-    }
   ];
 }
 </script>

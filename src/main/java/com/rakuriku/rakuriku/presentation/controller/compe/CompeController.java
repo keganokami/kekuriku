@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("compe")
+@RequestMapping("api/compe")
 @RequiredArgsConstructor
 public class CompeController {
 

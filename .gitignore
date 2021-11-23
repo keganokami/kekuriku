@@ -40,4 +40,4 @@ build/
 .vscode/
 
 # Nuxt build
-.nuxt
+.nuxt/
