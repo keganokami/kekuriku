@@ -5,9 +5,21 @@
     <form action="">
       <div class="">
         <v-text-field name="compe-name" label="大会名" outlined></v-text-field>
-        <v-text-field name="compe-place" label="大会場所" outlined></v-text-field>
-        <v-text-field name="compe-dates" label="大会日時" outlined></v-text-field>
-        <v-file-input name="compe-guidelines-file" chips small-chips truncate-length="15"
+        <v-text-field
+          name="compe-place"
+          label="大会場所"
+          outlined
+        ></v-text-field>
+        <v-text-field
+          name="compe-dates"
+          label="大会日時"
+          outlined
+        ></v-text-field>
+        <v-file-input
+          name="compe-guidelines-file"
+          chips
+          small-chips
+          truncate-length="15"
           >大会要項</v-file-input
         >
         <!-- コンポーネントにして、カテゴリー分回す -->
@@ -26,9 +38,9 @@
         name="compe-create-btn"
         class="justify-center align-center"
         dark
-        type="submit"
         width="170"
         color="#4169e1"
+        @click="onClick()"
       >
         作成
       </v-btn>
@@ -40,7 +52,6 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 
-// TODO 移動
 export type Events = {
   id: string,
   name: string
@@ -48,7 +59,6 @@ export type Events = {
 
 @Component
 export default class DashBoard extends Vue {
-
   compeName!: string;
   compePlace!: string;
   compeDates!: string;
@@ -72,7 +82,6 @@ export default class DashBoard extends Vue {
     },
   ];
 
-
   singleSelect = false;
   selected = [];
   headers = [
@@ -89,5 +98,12 @@ export default class DashBoard extends Vue {
       value: "name",
     },
   ];
+
+  postEvents: Events[] = [];
+
+  onClick() {
+    this.postEvents = [...this.selected];
+    console.log(JSON.stringify(this.postEvents));
+  }
 }
 </script>
