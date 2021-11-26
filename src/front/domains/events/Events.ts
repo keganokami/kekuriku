@@ -1,6 +1,7 @@
 export default class Events {
     constructor(
-        public id = '',
-        public name = ''
+        public eventId = '',
+        public eventName = '',
+        public eventCategory = ''
     ){}
 }

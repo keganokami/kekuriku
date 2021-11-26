@@ -4,13 +4,20 @@
     <h2>大会作成</h2>
     <form action="">
       <div class="">
-        <v-text-field name="compe-name" label="大会名" outlined></v-text-field>
         <v-text-field
+          v-model="compeName"
+          name="compe-name"
+          label="大会名"
+          outlined
+        ></v-text-field>
+        <v-text-field
+          v-model="compePlace"
           name="compe-place"
           label="大会場所"
           outlined
         ></v-text-field>
         <v-text-field
+          v-model="compeDates"
           name="compe-dates"
           label="大会日時"
           outlined
@@ -29,7 +36,7 @@
           :headers="headers"
           :items="compeEvents"
           :single-select="singleSelect"
-          item-key="name"
+          item-key="eventId"
           show-select
           class="elevation-1"
         />
@@ -51,59 +58,93 @@
  
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-
-export type Events = {
-  id: string,
-  name: string
-}
+import Compe from "../../domains/compe/Compe";
+import CompeService from "../../domains/compe/CompeService";
+import Events from "../../domains/events/Events";
 
 @Component
 export default class DashBoard extends Vue {
-  compeName!: string;
-  compePlace!: string;
-  compeDates!: string;
+  compeName = "";
+  compePlace = "";
+  compeDates = "";
   compeGuidelinesFile!: File[];
-  compeEvents: Events[] = [
+  compeEvents = [
     {
-      id: "001",
-      name: "男子100m",
+      eventId: "001",
+      eventName: "男子100m",
+      eventCategory: "SPRINT"
     },
     {
-      id: "002",
-      name: "男子200m",
+      eventId: "002",
+      eventName: "男子200m",
+      eventCategory: "SPRINT"
     },
     {
-      id: "003",
-      name: "男子300m",
+      eventId: "003",
+      eventName: "男子300m",
+      eventCategory: "SPRINT"
     },
     {
-      id: "004",
-      name: "男子400m",
+      eventId: "004",
+      eventName: "男子400m",
+      eventCategory: "SPRINT"
     },
   ];
 
   singleSelect = false;
-  selected = [];
+  selected:Events[] = [];
   headers = [
     {
       text: "id",
       align: " d-none",
       sortable: false,
-      value: "id",
+      value: "eventId",
     },
     {
       text: "種目",
       align: "start",
       sortable: false,
-      value: "name",
+      value: "eventName",
+    },
+    {
+      text: "カテゴリー",
+      align: " d-none",
+      sortable: false,
+      value: "eventCategory",
     },
   ];
 
   postEvents: Events[] = [];
+  compeService!: CompeService;
+  adminId!: string;
+
+  fetch() {
+    this.compeService = new CompeService();
+    this.adminId = "admin001";
+  }
 
   onClick() {
-    this.postEvents = [...this.selected];
-    console.log(JSON.stringify(this.postEvents));
+    for(const row of this.selected) {
+      const event: Events = {
+        eventId: row.eventId,
+        eventName: row.eventName,
+        eventCategory: row.eventCategory
+      }
+      this.postEvents.push(event)
+    }
+
+    const compe = new Compe(
+      this.adminId,
+      this.compeName,
+      this.compePlace,
+      this.compeDates,
+      null,
+      this.postEvents
+    )
+debugger
+    this.compeService.createCompe(compe).then(() => {
+      console.log("成功");
+    })
   }
 }
 </script>
