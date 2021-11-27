@@ -1,10 +1,10 @@
-import colors from 'vuetify/es5/util/colors'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
   generate: {
     dir: '../main/resources/static',
+    fallback: true
   },
 
   router: {
@@ -75,11 +75,11 @@ export default {
 
   proxy: {
     '/management-account/': {
-      target: 'http://localhost:8080',
+      target: 'http://sb:8080/',
       headers: { 'X-Forwarded-Host': 'localhost:3000' }
     },
-    '/auth/': {
-      target: 'http://localhost:8080',
+    '/api/': {
+      target: 'http://sb:8080/',
       headers: { 'X-Forwarded-Host': 'localhost:3000' }
     }
   }

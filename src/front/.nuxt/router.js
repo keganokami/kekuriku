@@ -4,9 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _4d3ef9c4 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _b20ba866 = () => interopDefault(import('../pages/signup.vue' /* webpackChunkName: "pages/signup" */))
 const _27c7f622 = () => interopDefault(import('../pages/auth/dashboard.vue' /* webpackChunkName: "pages/auth/dashboard" */))
+const _11b22a8e = () => interopDefault(import('../pages/auth/compe/list.vue' /* webpackChunkName: "pages/auth/compe/list" */))
+const _f8d152a6 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -20,10 +21,6 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/login",
-    component: _4d3ef9c4,
-    name: "login"
-  }, {
     path: "/signup",
     component: _b20ba866,
     name: "signup"
@@ -31,6 +28,14 @@ export const routerOptions = {
     path: "/auth/dashboard",
     component: _27c7f622,
     name: "auth-dashboard"
+  }, {
+    path: "/auth/compe/list",
+    component: _11b22a8e,
+    name: "auth-compe-list"
+  }, {
+    path: "/",
+    component: _f8d152a6,
+    name: "index"
   }],
 
   fallback: false

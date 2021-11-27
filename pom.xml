@@ -84,6 +84,11 @@
 			<artifactId>hibernate-tools</artifactId>
 			<version>5.5.7.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>2.3.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -203,6 +208,22 @@
 										<source>src/tools/java</source>
 									</sources>
 								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.hibernate.orm.tooling</groupId>
+						<artifactId>hibernate-enhance-maven-plugin</artifactId>
+						<version>5.4.1.Final</version>
+						<executions>
+							<execution>
+								<configuration>
+									<failOnError>true</failOnError>
+									<enableLazyInitialization>true</enableLazyInitialization>
+								</configuration>
+								<goals>
+									<goal>enhance</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>

@@ -15,7 +15,7 @@
 
   <table-filter match-name="flyway_schema_history" exclude="true" />
 
-  <table-filter match-name="admins" package="com.rakuriku.rakuriku.entities.auth"></table-filter>
-  <table-filter match-name="tmp_test" package="com.rakuriku.rakuriku.entities.auth"></table-filter>
+  <table-filter match-name="admins" package="com.rakuriku.rakuriku.domain.model.auth"></table-filter>
+  <table-filter match-name="compe" package="com.rakuriku.rakuriku.domain.model.compe"></table-filter>
 
 </hibernate-reverse-engineering>
