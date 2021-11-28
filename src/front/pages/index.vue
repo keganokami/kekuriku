@@ -55,7 +55,7 @@ export default class Login extends Vue {
 
   async login() {
     await this.$store.dispatch("login", {
-      userId: this.id,
+      adminId: this.id,
       password: this.password,
     });
   }

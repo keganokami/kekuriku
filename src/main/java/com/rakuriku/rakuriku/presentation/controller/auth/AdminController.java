@@ -12,7 +12,6 @@ import com.rakuriku.rakuriku.presentation.controller.auth.request.AuthFactory;
 import com.rakuriku.rakuriku.presentation.controller.auth.request.LoginRequest;
 import com.rakuriku.rakuriku.presentation.controller.auth.request.SignUpRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -21,22 +20,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javassist.tools.web.BadHttpRequest;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/management-account")
+@RequiredArgsConstructor
 public class AdminController {
 	private final AdminService service;
 	// トークンを作成するためのProvider
 	private final JWTProvider provider;
 
 	private final AuthFactory authFactory;
-
-	@Autowired
-	public AdminController(AdminService service, JWTProvider provider ,AuthFactory authFactory) {
-		this.service = service;
-		this.provider = provider;
-		this.authFactory = authFactory;
-	}
 
 	@Transactional
 	@PostMapping("/new")
@@ -53,7 +47,7 @@ public class AdminController {
 		// TODO try catchを消したい。
 		AdminsEntity admin;
 		try {
-			admin = this.service.getLoginAdminUser(form.getUserId(), form.getPassword());
+			admin = this.service.getLoginAdminUser(form.getAdminId(), form.getPassword());
 			
 			if (admin == null) {
 				response.sendError(404, "ユーザーが見つかりませんでした");

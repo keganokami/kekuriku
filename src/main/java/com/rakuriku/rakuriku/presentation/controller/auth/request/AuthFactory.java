@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthFactory {
     public AdminsEntity createAdminEntityForRegister(SignUpRequest request) {
-        return new AdminsEntity(request.getUserId(), request.getPassword(), request.getEmailAddress(), "admin");
+        return new AdminsEntity(request.getAdminId(), request.getPassword(), request.getEmailAddress(), "admin");
     }
 }
