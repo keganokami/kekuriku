@@ -123,11 +123,9 @@ export default class DashBoard extends Vue {
 
   postEvents: Events[] = [];
   compeService!: CompeService;
-  adminId!: string;
 
   fetch() {
     this.compeService = new CompeService();
-    this.adminId = "admin001";
   }
 
   onSubmit() {
@@ -141,7 +139,6 @@ export default class DashBoard extends Vue {
     }
 
     const compe = new Compe(
-      this.adminId,
       this.compeName,
       this.compePlace,
       this.compeDates,

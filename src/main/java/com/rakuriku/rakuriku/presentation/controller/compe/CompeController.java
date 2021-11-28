@@ -31,6 +31,7 @@ public class CompeController {
 
 	@GetMapping("/my-compes")
 	public List<CompeResponse> getCompes(HttpServletRequest httpServletRequest) {
+		// headerはコンフィグにするか
 		String adminId = provider.getSubject(httpServletRequest.getHeader("x-auth-token"));
 		List<CompeEntity> compeEntity = compeService.getCompes(adminId);
 		return compeFactory.createCompeResponse(compeEntity);
