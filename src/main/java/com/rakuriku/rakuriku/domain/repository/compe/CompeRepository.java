@@ -22,4 +22,6 @@ public interface CompeRepository extends CrudRepository<CompeEntity, String> {
         + "admins.id = :adminId"
     )
 	List<CompeEntity> findWithCompeByAdminId(@Param("adminId") String adminId);
+
+    CompeEntity findWithCompeByCompeId(String compeId);
 }

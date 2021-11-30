@@ -21,6 +21,13 @@
     "_name": "_11b22a8e"
   },
   {
+    "name": "auth-compe-compeId",
+    "path": "/auth/compe/:compeId?",
+    "component": "/root/rakuriku/src/front/pages/auth/compe/_compeId.vue",
+    "chunkName": "pages/auth/compe/_compeId",
+    "_name": "_1921844d"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/root/rakuriku/src/front/pages/index.vue",

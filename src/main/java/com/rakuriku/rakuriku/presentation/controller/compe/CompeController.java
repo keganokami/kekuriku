@@ -13,6 +13,7 @@ import com.rakuriku.rakuriku.presentation.controller.compe.response.CompeRespons
 import com.rakuriku.rakuriku.presentation.controller.compe.response.CreateCompeResultResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,13 @@ public class CompeController {
 		// headerはコンフィグにするか
 		String adminId = provider.getSubject(httpServletRequest.getHeader("x-auth-token"));
 		List<CompeEntity> compeEntity = compeService.getCompes(adminId);
+		return compeFactory.createCompeResponse(compeEntity);
+	}
+
+	@GetMapping("/my-compe/{compeId}")
+	public CompeResponse getCompe(@PathVariable String compeId, HttpServletRequest httpServletRequest) {
+		// adminIdで取得したリストに対して、検索をかけるとセキュリティは上がるかコストがかかる（検討）
+		CompeEntity compeEntity = compeService.getCompe(compeId);
 		return compeFactory.createCompeResponse(compeEntity);
 	}
 

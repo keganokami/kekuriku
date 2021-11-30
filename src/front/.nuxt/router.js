@@ -7,6 +7,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _b20ba866 = () => interopDefault(import('../pages/signup.vue' /* webpackChunkName: "pages/signup" */))
 const _27c7f622 = () => interopDefault(import('../pages/auth/dashboard.vue' /* webpackChunkName: "pages/auth/dashboard" */))
 const _11b22a8e = () => interopDefault(import('../pages/auth/compe/list.vue' /* webpackChunkName: "pages/auth/compe/list" */))
+const _1921844d = () => interopDefault(import('../pages/auth/compe/_compeId.vue' /* webpackChunkName: "pages/auth/compe/_compeId" */))
 const _f8d152a6 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -32,6 +33,10 @@ export const routerOptions = {
     path: "/auth/compe/list",
     component: _11b22a8e,
     name: "auth-compe-list"
+  }, {
+    path: "/auth/compe/:compeId?",
+    component: _1921844d,
+    name: "auth-compe-compeId"
   }, {
     path: "/",
     component: _f8d152a6,

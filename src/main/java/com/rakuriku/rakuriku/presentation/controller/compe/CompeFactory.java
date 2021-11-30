@@ -42,6 +42,10 @@ public class CompeFactory {
         return map(compeEntities, CompeResponse.class);
     }
 
+    public CompeResponse createCompeResponse(CompeEntity compeEntity) {
+        return map(compeEntity, CompeResponse.class);
+    }
+
     // TODO 切り出す
     public <D> D map(Object src, Class<D> dstType) {
         return modelMapper.map(src, dstType);

@@ -26,5 +26,10 @@ public class CompeServiceImpl implements CompeService {
 	public List<CompeEntity> getCompes(String adminId) {
 		return compeRepository.findWithCompeByAdminId(adminId);
 	}
+
+	@Override
+	public CompeEntity getCompe(String compeId) {
+		return compeRepository.findWithCompeByCompeId(compeId);
+	}
 	
 }

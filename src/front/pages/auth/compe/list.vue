@@ -15,6 +15,13 @@
         <div>
           <span class="mr-3 my-width">開催日時:</span>{{ compe.compeDates }}
         </div>
+        <div>
+          <v-btn
+          @click="toEntryPage(compe.compeId)"
+          >
+            大会申し込みページ作成
+          </v-btn>
+        </div>
       </v-sheet>
     </div>
   </div>
@@ -28,11 +35,17 @@ import CompeService from "../../../domains/compe/CompeService";
 export default class DashBoard extends Vue {
   compeService!: CompeService;
   myCompes!: CompeResponse[];
+  $router!: any;
   async fetch() {
     this.compeService = new CompeService();
     await this.compeService.getCompes().then((response: any) => {
       this.myCompes = response.data;
     });
+  }
+
+  toEntryPage(compeId: string) {
+    debugger
+    this.$router.push(`/auth/compe/${compeId}`);
   }
 }
 </script>
