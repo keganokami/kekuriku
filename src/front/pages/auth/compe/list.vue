@@ -43,8 +43,7 @@ export default class DashBoard extends Vue {
     });
   }
 
-  toEntryPage(compeId: string) {
-    debugger
+  toEntryPage(compeId: string) {  
     this.$router.push(`/auth/compe/${compeId}`);
   }
 }

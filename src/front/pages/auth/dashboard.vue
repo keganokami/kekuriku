@@ -1,63 +1,13 @@
 
 <template>
   <div class="d-flex flex-column pa-4 justify-center align-center">
-    <h2>大会作成</h2>
-    <v-form ref="form" v-model="valid">
-      <div class="">
-        <v-text-field
-          v-model="compeName"
-          name="compe-name"
-          label="大会名"
-          outlined
-          :rules="inputRules"
-        ></v-text-field>
-        <v-text-field
-          v-model="compePlace"
-          name="compe-place"
-          label="大会場所"
-          outlined
-          :rules="inputRules"
-        ></v-text-field>
-        <v-text-field
-          v-model="compeDates"
-          name="compe-dates"
-          label="大会日時"
-          outlined
-          :rules="inputRules"
-        ></v-text-field>
-        <v-file-input
-          name="compe-guidelines-file"
-          chips
-          hidden
-          small-chips
-          truncate-length="15"
-          >大会要項</v-file-input
-        >
-        <!-- コンポーネントにして、カテゴリー分回す -->
-        <h3>短距離種目</h3>
-        <v-data-table
-          v-model="selected"
-          :headers="headers"
-          :items="compeEvents"
-          :single-select="singleSelect"
-          item-key="eventId"
-          show-select
-          class="elevation-1"
-          :value="selected"
-        />
-      </div>
-      <v-btn
-        :disabled="!valid  || selected.length === 0"
-        name="compe-create-btn"
-        class="justify-center align-center"
-        width="170"
-        color="#4169e1"
-        type="submit"
-        @click="onSubmit()"
-      >
-        作成
-      </v-btn>
-    </v-form>
+    <h2>ダッシュボード</h2>
+    <NuxtLink to="/auth/compe/create">
+      <v-btn dark width="170" color="#4169e1"> 大会作成 </v-btn>
+    </NuxtLink>
+    <NuxtLink to="/auth/compe/list">
+      <v-btn dark width="170" color="#4169e1"> 大会一覧 </v-btn>
+    </NuxtLink>
   </div>
 </template>
  
@@ -162,7 +112,7 @@ export default class DashBoard extends Vue {
 
   @Watch("selected")
   isDisableSubmit() {
-    return this.selected.length === 0
+    return this.selected.length === 0;
   }
 }
 </script>

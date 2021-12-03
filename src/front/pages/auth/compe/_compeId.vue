@@ -14,15 +14,82 @@
           name="name"
           label="お名前"
           outlined
-          :rules="inputRules"
+          :rules="[
+            $validation.requiredRule(),
+            $validation.maxLengthRule(50, 'お名前'),
+          ]"
         ></v-text-field>
         <v-text-field
-          v-model="name"
-          name="name"
-          label="お名前"
+          v-model="nameKana"
+          name="nameKana"
+          label="フリガナ"
           outlined
-          :rules="inputRules"
+          :rules="[
+            $validation.requiredRule(),
+            $validation.maxLengthRule(50, 'フリガナ'),
+          ]"
         ></v-text-field>
+        <v-radio-group v-model="sex" row>
+          <v-radio label="男性" value="man"></v-radio>
+          <v-radio label="女性" value="woman"></v-radio>
+          <v-radio label="回答なし" value="non"></v-radio>
+        </v-radio-group>
+        <v-text-field
+          v-model="team"
+          name="team"
+          label="所属チーム・学校"
+          outlined
+          :rules="[
+            $validation.requiredRule(),
+            $validation.maxLengthRule(50, '所属チーム・学校'),
+          ]"
+        ></v-text-field>
+        <v-text-field
+          v-model="phoneNum"
+          name="phoneNum"
+          type="phone"
+          label="連絡先・緊急連絡先"
+          outlined
+          :rules="[
+            $validation.requiredRule(),
+          ]"
+        ></v-text-field>
+        <v-data-table
+          v-model="selected"
+          :headers="headers"
+          :items="compeEvents"
+          :single-select="singleSelect"
+          item-key="eventId"
+          show-select
+          class="elevation-1"
+          :value="selected"
+        >
+        <!-- checkがあれば入力必須にする -->
+          <template v-slot:[`item.eventRecode`]="props">
+            <v-edit-dialog :return-value.sync="props.item.eventRecode">
+              {{ props.item.eventRecode }}
+              <template v-slot:input>
+                <v-text-field
+                  v-model.number="props.item.eventRecode"
+                  label="Edit"
+                  single-line
+                  type="text"
+                ></v-text-field>
+              </template>
+            </v-edit-dialog>
+          </template>
+        </v-data-table>
+        <v-btn
+          :disabled="!valid || selected.length === 0"
+          name="compe-create-btn"
+          class="justify-center align-center"
+          width="170"
+          color="#4169e1"
+          type="submit"
+          @click="onSubmit()"
+        >
+          申込をする
+        </v-btn>
       </v-form>
       <div>
         <v-btn @click="toCompeListPage()"> 一覧に戻る </v-btn>
@@ -35,24 +102,78 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import CompeResponse from "../../../domains/compe/CompeResponse";
 import CompeService from "../../../domains/compe/CompeService";
+import EntryEvents from "../../../domains/events/EntryEvents";
 
 @Component
 export default class EntryPage extends Vue {
+  name = "";
+  nameKana = "";
+  team = "";
+  phoneNum = "";
+  sex = 0;
+
   $route!: any;
   $router!: any;
   compeService!: CompeService;
   myCompe!: CompeResponse;
   compeId = this.$route.params.compeId;
 
+  valid = true;
+  compeEvents = [];
+  singleSelect = false;
+  selected: EntryEvents[] = [];
+  headers = [
+    {
+      text: "id",
+      align: " d-none",
+      sortable: false,
+      value: "eventId",
+    },
+    {
+      text: "種目",
+      align: "start",
+      sortable: false,
+      value: "eventName",
+    },
+    {
+      text: "カテゴリー",
+      align: " d-none",
+      sortable: false,
+      value: "eventCategory",
+    },
+    {
+      text: "参考記録",
+      align: "start",
+      sortable: false,
+      value: "eventRecode",
+    },
+  ];
+
+  postEvents: EntryEvents[] = [];
+
   async fetch() {
     this.compeService = new CompeService();
     await this.compeService.getCompe(this.compeId).then((response: any) => {
       this.myCompe = response.data;
+      this.compeEvents = response.data.compeEvent;
     });
   }
 
   toCompeListPage() {
     this.$router.push("/auth/compe/list");
+  }
+
+  onSubmit() {
+    for (const row of this.selected) {
+      const event: EntryEvents = {
+        eventId: row.eventId,
+        eventName: row.eventName,
+        eventCategory: row.eventCategory,
+        eventRecode: row.eventRecode,
+      };
+      this.postEvents.push(event);
+    }
+    console.log(this.postEvents);
   }
 }
 </script>
