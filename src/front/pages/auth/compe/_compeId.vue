@@ -52,41 +52,55 @@
           outlined
           :rules="[$validation.requiredRule()]"
         ></v-text-field>
-        <v-data-table
-          dense
-          v-model="selected"
-          :headers="headers"
-          :items="compeEvents"
-          :single-select="singleSelect"
-          item-key="eventId"
-          show-select
-          class="elevation-1"
-          :value="selected"
-        >
-          <!-- checkがあれば入力必須にする -->
-          <template v-slot:[`item.eventRecode`]="props">
-            <v-edit-dialog
-              large
-              persistent
-              class="vdialognew"
-              cancel-text="閉じる"
-              save-text="確定"
-              light
-              :return-value.sync="props.item.eventRecode"
-            >
-              {{ props.item.eventRecode }}
-              <template v-slot:input>
-                <v-text-field
-                  v-model.number="props.item.eventRecode"
-                  class=""
-                  label="Edit"
-                  single-line
-                  type="text"
-                ></v-text-field>
-              </template>
-            </v-edit-dialog>
-          </template>
-        </v-data-table>
+        <v-card>
+          <v-card-title>
+            短距離種目
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table
+            dense
+            v-model="selected"
+            :headers="headers"
+            :items="compeEvents"
+            :single-select="singleSelect"
+            item-key="eventId"
+            show-select
+            class="elevation-1"
+            :value="selected"
+            :search="search"
+          >
+            <!-- checkがあれば入力必須にする -->
+            <template v-slot:[`item.eventRecode`]="props">
+              <v-edit-dialog
+                large
+                class="vdialognew"
+                cancel-text="閉じる"
+                save-text="確定"
+                light
+                :return-value.sync="props.item.eventRecode"
+              >
+                {{ props.item.eventRecode }}
+                <template v-slot:input>
+                  <v-text-field
+                    v-model.number="props.item.eventRecode"
+                    type="number"
+                    :rules="[$validation.runTimeRecodeRule()]"
+                    v-if="selected"
+                    label="Edit"
+                    single-line
+                  ></v-text-field>
+                </template>
+              </v-edit-dialog>
+            </template>
+          </v-data-table>
+        </v-card>
         <v-btn
           :disabled="!valid || selected.length === 0"
           name="compe-create-btn"
@@ -110,6 +124,7 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import CompeResponse from "../../../domains/compe/CompeResponse";
 import CompeService from "../../../domains/compe/CompeService";
+import CompeEntry from "../../../domains/compe/CompeEntry";
 import EntryEvents from "../../../domains/events/EntryEvents";
 
 @Component
@@ -118,7 +133,9 @@ export default class EntryPage extends Vue {
   nameKana = "";
   team = "";
   phoneNum = "";
-  sex = 0;
+  sex = "";
+
+  search = "";
 
   $route!: any;
   $router!: any;
@@ -157,7 +174,7 @@ export default class EntryPage extends Vue {
       cellClass: "recode-width",
     },
   ];
-
+$ref: any;
   postEvents: EntryEvents[] = [];
 
   async fetch() {
@@ -171,8 +188,10 @@ export default class EntryPage extends Vue {
   toCompeListPage() {
     this.$router.push("/auth/compe/list");
   }
-
+  
   onSubmit() {
+    console.log(this.$ref.form);
+    
     for (const row of this.selected) {
       const event: EntryEvents = {
         eventId: row.eventId,
@@ -182,7 +201,20 @@ export default class EntryPage extends Vue {
       };
       this.postEvents.push(event);
     }
-    console.log(this.postEvents);
+
+    const entryRequest = new CompeEntry(
+      this.name,
+      this.nameKana,
+      this.team,
+      this.phoneNum,
+      this.sex,
+      this.postEvents
+    );
+    console.log(entryRequest);
+    debugger;
+    // this.compeService.createCompe(compe).then(() => {
+    //   console.log("成功");
+    // });
   }
 }
 </script>
@@ -190,14 +222,19 @@ export default class EntryPage extends Vue {
 <style lang="scss" scoped>
 ::v-deep {
   .v-small-dialog__activator {
-    height: 100% !important;
-    background: grey !important;
+    height: 100%;
+    background: rgb(247, 252, 182);
     padding: 5px 10px;
     width: 30%;
     margin-left: 70%;
   }
   td.text-right.recode-width {
     padding: 0 !important;
+  }
+
+  .vdialognew > button.v-btn.v-btn--text.theme--light.v-size--default.primary--text {
+    color: gray !important;
+    background:gray !important;
   }
 }
 </style>

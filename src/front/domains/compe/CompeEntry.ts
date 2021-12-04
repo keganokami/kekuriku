@@ -1,11 +1,12 @@
 import EntryEvents from "../events/EntryEvents";
 
-export default class Compe {
+export default class CompeEntry {
   constructor(
-    public compeName = '',
-    public compePlace = '',
-    public compeDates = '',
-    public compeGuidelinesFile = null,
+    public name = "",
+    public nameKana = "",
+    public team = "",
+    public phoneNum = "",
+    public sex = "",
     public compeEvent: EntryEvents[] = []
-  ) { }
+  ) {}
 }

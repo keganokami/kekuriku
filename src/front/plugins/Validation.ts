@@ -14,9 +14,23 @@ export const validation = {
       }
       return value.length <= length || message;
     }
+  },
+
+  runTimeRecodeRule() {
+    return (value: number) => {
+      if (typeof value === 'undefined') {
+        return true;
+      } else if (typeof value === 'string' && value === "") {
+        return true;
+      } else {
+        const v = String(value);
+        const re = /(^\d{2})\.(\d{2}$)/;
+        return !!re.exec(v) || "記録は12.88の形式で入力してください。"
+      }
+    }
   }
 }
 
-export default function(_app: any, inject: any) {
+export default function (_app: any, inject: any) {
   inject('validation', validation);
 }
