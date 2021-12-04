@@ -1,7 +1,8 @@
 import Events from "../events/Events";
 
-export default class Compe {
+export default class CompeResponse {
   constructor(
+    public compeId = "",
     public compeName = '',
     public compePlace = '',
     public compeDates = '',

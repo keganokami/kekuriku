@@ -14,11 +14,25 @@
     "_name": "_27c7f622"
   },
   {
+    "name": "auth-compe-create",
+    "path": "/auth/compe/create",
+    "component": "/root/rakuriku/src/front/pages/auth/compe/create.vue",
+    "chunkName": "pages/auth/compe/create",
+    "_name": "_43e6e757"
+  },
+  {
     "name": "auth-compe-list",
     "path": "/auth/compe/list",
     "component": "/root/rakuriku/src/front/pages/auth/compe/list.vue",
     "chunkName": "pages/auth/compe/list",
     "_name": "_11b22a8e"
+  },
+  {
+    "name": "auth-compe-compeId",
+    "path": "/auth/compe/:compeId?",
+    "component": "/root/rakuriku/src/front/pages/auth/compe/_compeId.vue",
+    "chunkName": "pages/auth/compe/_compeId",
+    "_name": "_1921844d"
   },
   {
     "name": "index",

@@ -24,8 +24,8 @@ public class JWTProvider {
     // Signatureのエンコードに使うシークレットキー
     private static final String TOKEN_SECRET_KEY = "This is secrect!";
 
-    // トークンの有効期間(1時間)
-    private static final long TOKEN_VAILD_DURATION = 1000L * 60L * 60L;
+    // トークンの有効期間
+    private static final long TOKEN_VAILD_DURATION = 1000L * 600L * 600L;
 
     // ユーザ情報を取得するためのサービスクラス
     private final AdminService service;
@@ -37,7 +37,7 @@ public class JWTProvider {
 
     // adminオブジェクトからJWTを作成する
     public String createToken(AdminsEntity admin) {
-        Claims claims = Jwts.claims().setSubject(admin.getUserId());
+        Claims claims = Jwts.claims().setSubject(admin.getAdminId());
         claims.put("roles", admin.getRole());
 
         Date iat = new Date();

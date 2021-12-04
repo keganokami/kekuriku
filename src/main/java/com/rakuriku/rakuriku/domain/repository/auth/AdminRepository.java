@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminRepository extends JpaRepository<AdminsEntity, Integer> {
-    AdminsEntity findByUserId(String userId);
+    AdminsEntity findByAdminId(String userId);
 
-    AdminsEntity findByUserIdAndPassword(String userId, String password);
+    AdminsEntity findByAdminIdAndPassword(String userId, String password);
 }

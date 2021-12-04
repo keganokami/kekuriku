@@ -45,7 +45,7 @@ public class AdminService {
     }
 
     public AdminsEntity getAdminUser(final String userId) {
-        return repo.findByUserId(userId);
+        return repo.findByAdminId(userId);
     }
 
     public void signUpAdmin(AdminsEntity admin) {

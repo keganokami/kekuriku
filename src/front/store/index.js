@@ -11,7 +11,7 @@ export const getters = {
 };
 
 export const mutations = {
-    updateId(state, id){
+    adminId(state, id){
       state.id = id;
     },
     resetData(state) {
@@ -25,13 +25,13 @@ export const actions = {
         .post(
           'management-account/login',
           {
-            userId: authData.userId,
+            adminId: authData.adminId,
             password: authData.password
           }
         )
         .then((response) => {
           localStorage.setItem('token', response.headers['x-auth-token']);
-            commit('updateId', authData.userId);
+            commit('adminId', authData.adminId);
             this.$router.push('/auth/dashboard');
         }).catch((error) => {
           console.log("認証エラー");
