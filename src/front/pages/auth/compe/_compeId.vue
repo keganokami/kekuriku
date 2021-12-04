@@ -3,7 +3,7 @@
     v-if="!$fetchState.pending"
     class="d-flex flex-column pa-4 justify-center align-center"
   >
-    <v-sheet class="mb-3 pa-5" color="#f5f5f5" elevation="1" width="100%">
+    <v-sheet class="mb-3 pa-5" color="#f5f5f5" elevation="1" width="60%">
       <h2>大会申込</h2>
       <div><span>大会名</span>{{ myCompe.compeName }}</div>
       <div><span>開催場所</span>{{ myCompe.compePalce }}</div>
@@ -50,11 +50,10 @@
           type="phone"
           label="連絡先・緊急連絡先"
           outlined
-          :rules="[
-            $validation.requiredRule(),
-          ]"
+          :rules="[$validation.requiredRule()]"
         ></v-text-field>
         <v-data-table
+          dense
           v-model="selected"
           :headers="headers"
           :items="compeEvents"
@@ -64,13 +63,22 @@
           class="elevation-1"
           :value="selected"
         >
-        <!-- checkがあれば入力必須にする -->
+          <!-- checkがあれば入力必須にする -->
           <template v-slot:[`item.eventRecode`]="props">
-            <v-edit-dialog :return-value.sync="props.item.eventRecode">
+            <v-edit-dialog
+              large
+              persistent
+              class="vdialognew"
+              cancel-text="閉じる"
+              save-text="確定"
+              light
+              :return-value.sync="props.item.eventRecode"
+            >
               {{ props.item.eventRecode }}
               <template v-slot:input>
                 <v-text-field
                   v-model.number="props.item.eventRecode"
+                  class=""
                   label="Edit"
                   single-line
                   type="text"
@@ -142,10 +150,11 @@ export default class EntryPage extends Vue {
       value: "eventCategory",
     },
     {
-      text: "参考記録",
-      align: "start",
+      text: "参考記録を入力してください",
+      align: "right",
       sortable: false,
       value: "eventRecode",
+      cellClass: "recode-width",
     },
   ];
 
@@ -178,5 +187,17 @@ export default class EntryPage extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+::v-deep {
+  .v-small-dialog__activator {
+    height: 100% !important;
+    background: grey !important;
+    padding: 5px 10px;
+    width: 30%;
+    margin-left: 70%;
+  }
+  td.text-right.recode-width {
+    padding: 0 !important;
+  }
+}
 </style>
