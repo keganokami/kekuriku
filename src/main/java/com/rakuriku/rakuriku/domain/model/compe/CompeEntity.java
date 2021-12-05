@@ -1,19 +1,20 @@
 package com.rakuriku.rakuriku.domain.model.compe;
-// Generated Nov 27, 2021, 9:30:51 AM by Hibernate Tools 5.3.9.Final
+// Generated Dec 5, 2021, 2:23:52 PM by Hibernate Tools 5.3.9.Final
 
 
+import com.rakuriku.rakuriku.domain.model.BaseEntity;
+import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
 import java.io.Serializable;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.rakuriku.rakuriku.domain.model.BaseEntity;
-import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 import org.hibernate.annotations.Type;
@@ -40,6 +41,7 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
      private String compePlace;
      private byte[] compeGuidelinesFile;
      private Serializable compeEvent;
+     private Set<CompeEntryManagementEntity> compeEntryManagements = new HashSet<CompeEntryManagementEntity>(0);
 
     public CompeEntity() {
     }
@@ -52,7 +54,7 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
         this.compePlace = compePlace;
         this.compeEvent = compeEvent;
     }
-    public CompeEntity(String compeId, AdminsEntity admins, String compeName, String compeDates, String compePlace, byte[] compeGuidelinesFile, Serializable compeEvent) {
+    public CompeEntity(String compeId, AdminsEntity admins, String compeName, String compeDates, String compePlace, byte[] compeGuidelinesFile, Serializable compeEvent, Set<CompeEntryManagementEntity> compeEntryManagements) {
        this.compeId = compeId;
        this.admins = admins;
        this.compeName = compeName;
@@ -60,6 +62,7 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
        this.compePlace = compePlace;
        this.compeGuidelinesFile = compeGuidelinesFile;
        this.compeEvent = compeEvent;
+       this.compeEntryManagements = compeEntryManagements;
     }
    
      @Id 
@@ -133,6 +136,15 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
     
     public void setCompeEvent(Serializable compeEvent) {
         this.compeEvent = compeEvent;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="compe")
+    public Set<CompeEntryManagementEntity> getCompeEntryManagements() {
+        return this.compeEntryManagements;
+    }
+    
+    public void setCompeEntryManagements(Set<CompeEntryManagementEntity> compeEntryManagements) {
+        this.compeEntryManagements = compeEntryManagements;
     }
 
 

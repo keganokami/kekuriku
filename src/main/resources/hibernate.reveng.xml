@@ -17,5 +17,7 @@
 
   <table-filter match-name="admins" package="com.rakuriku.rakuriku.domain.model.auth"></table-filter>
   <table-filter match-name="compe" package="com.rakuriku.rakuriku.domain.model.compe"></table-filter>
+  <table-filter match-name="entries" package="com.rakuriku.rakuriku.domain.model.compe"></table-filter>
+  <table-filter match-name="compe_entry_management" package="com.rakuriku.rakuriku.domain.model.compe"></table-filter>
 
 </hibernate-reverse-engineering>

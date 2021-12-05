@@ -1,14 +1,9 @@
 package com.rakuriku.rakuriku.domain.model.auth;
-// Generated Nov 27, 2021, 9:30:51 AM by Hibernate Tools 5.3.9.Final
+// Generated Dec 5, 2021, 2:23:52 PM by Hibernate Tools 5.3.9.Final
 
 
 import com.rakuriku.rakuriku.domain.model.BaseEntity;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -102,6 +97,7 @@ public class AdminsEntity extends BaseEntity implements java.io.Serializable {
     public void setCompes(Set<CompeEntity> compes) {
         this.compes = compes;
     }
+
 
 
 
