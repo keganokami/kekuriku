@@ -190,7 +190,6 @@ $ref: any;
   }
   
   onSubmit() {
-    console.log(this.$ref.form);
     
     for (const row of this.selected) {
       const event: EntryEvents = {
@@ -210,11 +209,9 @@ $ref: any;
       this.sex,
       this.postEvents
     );
-    console.log(entryRequest);
-    debugger;
-    // this.compeService.createCompe(compe).then(() => {
-    //   console.log("成功");
-    // });
+    this.compeService.entryCompe(entryRequest).then(() => {
+      console.log("成功");
+    });
   }
 }
 </script>
