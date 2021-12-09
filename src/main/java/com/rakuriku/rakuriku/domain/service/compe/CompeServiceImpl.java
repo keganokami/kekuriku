@@ -6,10 +6,11 @@ import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntryManagementEntity;
 import com.rakuriku.rakuriku.domain.model.compe.EntriesEntity;
 import com.rakuriku.rakuriku.domain.repository.compe.CompeRepository;
-import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryEvent;
+import com.rakuriku.rakuriku.presentation.controller.compe.EntryEventDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -36,7 +37,8 @@ public class CompeServiceImpl implements CompeService {
 	}
 
 	@Override
-	public CompeEntryManagementEntity entryCompe(EntriesEntity entriesEntity, List<EntryEvent> list) {
+	public CompeEntryManagementEntity entryCompe(EntriesEntity entriesEntity, List<EntryEventDto> list) {
+		
 		return null;
 	}
 	

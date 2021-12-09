@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
+import com.rakuriku.rakuriku.domain.model.compe.CompeEntryManagementEntity;
+import com.rakuriku.rakuriku.domain.model.compe.EntriesEntity;
 import com.rakuriku.rakuriku.domain.service.compe.CompeService;
 import com.rakuriku.rakuriku.infra.JWTProvider;
 import com.rakuriku.rakuriku.presentation.controller.compe.request.CompeRequest;
@@ -61,8 +63,11 @@ public class CompeController {
 	}
 
 	@PostMapping("/entry/new")
-	public EntryCompeResultResonse entryCompe(@RequestBody EntryCompeRequest entryCompeRequest) {
-		System.out.println(entryCompeRequest);
-		return new EntryCompeResultResonse(entryCompeRequest.getName(), "大会への申込が完了しました。", "");
+	public EntryCompeResultResonse entryCompe(@RequestBody EntryCompeRequest request) {
+		EntriesEntity entry = compeFactory.createEntriesEntity(request);
+		List<EntryEventDto> entriesEntityList = compeFactory.map(request.getCompeEvent(), EntryEventDto.class);
+
+		CompeEntryManagementEntity entried = compeService.entryCompe(entry, entriesEntityList);
+		return new EntryCompeResultResonse(entried.getId(), "大会への申込が完了しました。", "");
 	}
 }

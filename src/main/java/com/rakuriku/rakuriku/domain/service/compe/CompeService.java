@@ -5,7 +5,7 @@ import java.util.List;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntryManagementEntity;
 import com.rakuriku.rakuriku.domain.model.compe.EntriesEntity;
-import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryEvent;
+import com.rakuriku.rakuriku.presentation.controller.compe.EntryEventDto;
 
 public interface CompeService {
 	CompeEntity createCompe(CompeEntity compe);
@@ -14,6 +14,6 @@ public interface CompeService {
 
 	CompeEntity getCompe(String compeId);
 
-	CompeEntryManagementEntity entryCompe(EntriesEntity entriesEntity, List<EntryEvent> list);
+	CompeEntryManagementEntity entryCompe(EntriesEntity entriesEntity, List<EntryEventDto> list);
 
 }

@@ -1,6 +1,5 @@
 package com.rakuriku.rakuriku.presentation.controller.compe;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -12,7 +11,6 @@ import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
 import com.rakuriku.rakuriku.domain.model.compe.EntriesEntity;
 import com.rakuriku.rakuriku.presentation.controller.compe.request.CompeRequest;
 import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryCompeRequest;
-import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryEvent;
 import com.rakuriku.rakuriku.presentation.controller.compe.response.CompeResponse;
 
 import org.modelmapper.ModelMapper;

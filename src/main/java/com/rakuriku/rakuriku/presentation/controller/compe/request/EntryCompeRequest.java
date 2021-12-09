@@ -11,5 +11,5 @@ public class EntryCompeRequest {
     private String team;
     private String phoneNum;
     private String sex;
-    private List<EntryEvent> compeEvent;
+    private List<EntryEventRequest> compeEvent;
 }
