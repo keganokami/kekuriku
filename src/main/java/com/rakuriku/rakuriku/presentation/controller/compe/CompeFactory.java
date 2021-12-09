@@ -1,5 +1,6 @@
 package com.rakuriku.rakuriku.presentation.controller.compe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -8,7 +9,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
+import com.rakuriku.rakuriku.domain.model.compe.EntriesEntity;
 import com.rakuriku.rakuriku.presentation.controller.compe.request.CompeRequest;
+import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryCompeRequest;
+import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryEvent;
 import com.rakuriku.rakuriku.presentation.controller.compe.response.CompeResponse;
 
 import org.modelmapper.ModelMapper;
@@ -36,6 +40,16 @@ public class CompeFactory {
         compeEntity.setCompeEvent(objectMapper.writeValueAsString(request.getCompeEvent()));
 
         return compeEntity;
+    }
+
+    public EntriesEntity createEntriesEntity(EntryCompeRequest request) {
+        EntriesEntity entriesEntity = new EntriesEntity();
+        entriesEntity.setName(request.getName());
+        entriesEntity.setNameKana(request.getNameKana());
+        entriesEntity.setPhoneNumber(request.getPhoneNum());
+        entriesEntity.setSex(request.getSex());
+        entriesEntity.setNumber("001");
+        return entriesEntity;
     }
 
     public List<CompeResponse> createCompeResponse(List<CompeEntity> compeEntities) {

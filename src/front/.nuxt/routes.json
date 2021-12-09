@@ -3,42 +3,36 @@
     "name": "signup",
     "path": "/signup",
     "component": "/root/rakuriku/src/front/pages/signup.vue",
-    "chunkName": "pages/signup",
-    "_name": "_b20ba866"
+    "chunkName": "pages/signup"
   },
   {
     "name": "auth-dashboard",
     "path": "/auth/dashboard",
     "component": "/root/rakuriku/src/front/pages/auth/dashboard.vue",
-    "chunkName": "pages/auth/dashboard",
-    "_name": "_27c7f622"
+    "chunkName": "pages/auth/dashboard"
   },
   {
     "name": "auth-compe-create",
     "path": "/auth/compe/create",
     "component": "/root/rakuriku/src/front/pages/auth/compe/create.vue",
-    "chunkName": "pages/auth/compe/create",
-    "_name": "_43e6e757"
+    "chunkName": "pages/auth/compe/create"
   },
   {
     "name": "auth-compe-list",
     "path": "/auth/compe/list",
     "component": "/root/rakuriku/src/front/pages/auth/compe/list.vue",
-    "chunkName": "pages/auth/compe/list",
-    "_name": "_11b22a8e"
+    "chunkName": "pages/auth/compe/list"
   },
   {
     "name": "auth-compe-compeId",
     "path": "/auth/compe/:compeId?",
     "component": "/root/rakuriku/src/front/pages/auth/compe/_compeId.vue",
-    "chunkName": "pages/auth/compe/_compeId",
-    "_name": "_1921844d"
+    "chunkName": "pages/auth/compe/_compeId"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/root/rakuriku/src/front/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_f8d152a6"
+    "chunkName": "pages/index"
   }
 ]
