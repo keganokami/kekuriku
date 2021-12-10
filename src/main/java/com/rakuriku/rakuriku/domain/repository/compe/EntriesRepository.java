@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EntriesRepository extends CrudRepository<EntriesEntity, String> {
-    
 }

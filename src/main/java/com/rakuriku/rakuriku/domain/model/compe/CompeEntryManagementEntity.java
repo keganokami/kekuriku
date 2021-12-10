@@ -1,5 +1,5 @@
 package com.rakuriku.rakuriku.domain.model.compe;
-// Generated Dec 5, 2021, 2:23:52 PM by Hibernate Tools 5.3.9.Final
+// Generated Dec 10, 2021, 3:22:31 PM by Hibernate Tools 5.3.9.Final
 
 
 import com.rakuriku.rakuriku.domain.model.BaseEntity;

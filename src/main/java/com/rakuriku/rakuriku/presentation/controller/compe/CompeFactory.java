@@ -42,6 +42,7 @@ public class CompeFactory {
 
     public EntriesEntity createEntriesEntity(EntryCompeRequest request) {
         EntriesEntity entriesEntity = new EntriesEntity();
+        entriesEntity.setId(UUID.randomUUID().toString());
         entriesEntity.setName(request.getName());
         entriesEntity.setNameKana(request.getNameKana());
         entriesEntity.setPhoneNumber(request.getPhoneNum());

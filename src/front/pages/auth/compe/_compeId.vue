@@ -202,6 +202,7 @@ $ref: any;
     }
 
     const entryRequest = new CompeEntry(
+      this.compeId,
       this.name,
       this.nameKana,
       this.team,

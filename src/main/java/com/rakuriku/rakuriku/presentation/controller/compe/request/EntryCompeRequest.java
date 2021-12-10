@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class EntryCompeRequest {
+    private String compeId;
     private String name;
     private String nameKana;
     private String team;

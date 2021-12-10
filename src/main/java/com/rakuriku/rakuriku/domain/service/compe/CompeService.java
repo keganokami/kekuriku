@@ -14,6 +14,6 @@ public interface CompeService {
 
 	CompeEntity getCompe(String compeId);
 
-	CompeEntryManagementEntity entryCompe(EntriesEntity entriesEntity, List<EntryEventDto> list);
+	CompeEntryManagementEntity entryCompe(String compeId, EntriesEntity entriesEntity, List<EntryEventDto> list);
 
 }

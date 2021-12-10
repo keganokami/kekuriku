@@ -1,5 +1,5 @@
 create table entries (
-  id CHAR(36) PRIMARY KEY DEFAULT public.gen_random_uuid(),
+  id CHAR(36) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   name_kana VARCHAR(255) NOT NULL,
   sex CHAR(1) NOT NULL,
