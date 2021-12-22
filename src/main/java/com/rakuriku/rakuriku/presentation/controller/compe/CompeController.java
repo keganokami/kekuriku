@@ -64,10 +64,10 @@ public class CompeController {
 
 	@PostMapping("/entry/new")
 	public EntryCompeResultResonse entryCompe(@RequestBody EntryCompeRequest request) {
+		String compeId = request.getCompeId();
 		EntriesEntity entry = compeFactory.createEntriesEntity(request);
-		List<EntryEventDto> entriesEntityList = compeFactory.map(request.getCompeEvent(), EntryEventDto.class);
 
-		CompeEntryManagementEntity entried = compeService.entryCompe(entry, entriesEntityList);
-		return new EntryCompeResultResonse(entried.getId(), "大会への申込が完了しました。", "");
+		CompeEntryManagementEntity entried = compeService.entryCompe(compeId, entry, request.getCompeEvent());
+		return new EntryCompeResultResonse("entried.getId()", "大会への申込が完了しました。", "");
 	}
 }

@@ -84,6 +84,7 @@ export default class DashBoard extends Vue {
         eventId: row.eventId,
         eventName: row.eventName,
         eventCategory: row.eventCategory,
+        participationFee: 0
       };
       this.postEvents.push(event);
     }

@@ -5,6 +5,7 @@ create table entries (
   sex CHAR(1) NOT NULL,
   phone_number VARCHAR(30) NOT NULL,
   number VARCHAR(10),
+  total_participation_fee INTEGER,
   ${commonColumns}
 );
 

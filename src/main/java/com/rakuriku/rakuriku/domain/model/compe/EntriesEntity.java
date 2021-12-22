@@ -1,5 +1,5 @@
 package com.rakuriku.rakuriku.domain.model.compe;
-// Generated Dec 10, 2021, 3:22:31 PM by Hibernate Tools 5.3.9.Final
+// Generated Dec 12, 2021, 2:20:58 PM by Hibernate Tools 5.3.9.Final
 
 
 import com.rakuriku.rakuriku.domain.model.BaseEntity;
@@ -28,6 +28,7 @@ public class EntriesEntity extends BaseEntity implements java.io.Serializable {
      private String sex;
      private String phoneNumber;
      private String number;
+     private Integer totalParticipationFee;
      private Set<CompeEntryManagementEntity> compeEntryManagements = new HashSet<CompeEntryManagementEntity>(0);
 
     public EntriesEntity() {
@@ -41,13 +42,14 @@ public class EntriesEntity extends BaseEntity implements java.io.Serializable {
         this.sex = sex;
         this.phoneNumber = phoneNumber;
     }
-    public EntriesEntity(String id, String name, String nameKana, String sex, String phoneNumber, String number, Set<CompeEntryManagementEntity> compeEntryManagements) {
+    public EntriesEntity(String id, String name, String nameKana, String sex, String phoneNumber, String number, Integer totalParticipationFee, Set<CompeEntryManagementEntity> compeEntryManagements) {
        this.id = id;
        this.name = name;
        this.nameKana = nameKana;
        this.sex = sex;
        this.phoneNumber = phoneNumber;
        this.number = number;
+       this.totalParticipationFee = totalParticipationFee;
        this.compeEntryManagements = compeEntryManagements;
     }
    
@@ -111,6 +113,16 @@ public class EntriesEntity extends BaseEntity implements java.io.Serializable {
     
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    
+    @Column(name="total_participation_fee")
+    public Integer getTotalParticipationFee() {
+        return this.totalParticipationFee;
+    }
+    
+    public void setTotalParticipationFee(Integer totalParticipationFee) {
+        this.totalParticipationFee = totalParticipationFee;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="entries")
