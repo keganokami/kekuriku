@@ -70,7 +70,7 @@
           outlined
           :rules="[$validation.requiredRule()]"
         ></v-text-field>
-        <h3>短距離種目</h3>
+        <!-- <h3>短距離種目</h3>
         <v-data-table
           v-model="selected"
           :headers="headers"
@@ -95,7 +95,7 @@
                 <v-text-field
                   v-model.number="props.item.participationFee"
                   type="number"
-                  :rules="[$validation.runTimeRecodeRule()]"
+                  
                   v-if="selected"
                   label="Edit"
                   single-line
@@ -103,7 +103,13 @@
               </template>
             </v-edit-dialog>
           </template>
-        </v-data-table>
+        </v-data-table> -->
+        <create-event-data-table
+          :compe-events="compeEvents"
+          :headers="headers"
+          table-title="短距離種目"
+          :participation-fee-filter="participationFeeFilter"
+        ></create-event-data-table>
       </div>
       <v-btn
         :disabled="!valid || selected.length === 0"
@@ -135,26 +141,30 @@ export default class CreateCompe extends Vue {
   compeDates = "";
   radioGroup = "";
   compeGuidelinesFile!: File[];
-  compeEvents = [
+  compeEvents: Events[] = [
     {
       eventId: "001",
       eventName: "男子100m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
     {
       eventId: "002",
       eventName: "男子200m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
     {
       eventId: "003",
       eventName: "男子300m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
     {
       eventId: "004",
       eventName: "男子400m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
   ];
 
@@ -185,6 +195,12 @@ export default class CreateCompe extends Vue {
       sortable: false,
       value: "participationFee",
     },
+    {
+      text: "種目情報設定",
+      align: "start",
+      sortable: false,
+      value: "actions",
+    },
   ];
 
   postEvents: Events[] = [];
@@ -194,8 +210,8 @@ export default class CreateCompe extends Vue {
     this.compeService = new CompeService();
   }
 
-  participationFeeFilter() {
-    return this.radioGroup === '2';
+  get participationFeeFilter() {
+    return this.radioGroup === "2";
   }
 
   onSubmit() {
