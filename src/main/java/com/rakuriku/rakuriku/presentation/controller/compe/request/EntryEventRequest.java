@@ -12,4 +12,5 @@ public class EntryEventRequest {
     private String eventName;
     private String eventCategory;
     private String eventRecode;
+    private Integer participationFee;
 }

@@ -1,7 +1,11 @@
 <template>
   <v-data-table
     :headers="headers"
+    v-model="_selected"
     :items="compeEvents"
+    :single-select="singleSelect"
+    item-key="eventId"
+    show-select
     sort-by="calories"
     class="elevation-1"
   >
@@ -68,7 +72,14 @@
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon v-if="participationFeeFilter" small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
+      <v-icon
+        v-if="participationFeeFilter"
+        small
+        class="mr-2"
+        @click="editItem(item)"
+      >
+        mdi-pencil
+      </v-icon>
       <template v-else>
         <span class="subtitle-2 grey--text text--lighten-1">
           金額設定なし
@@ -84,7 +95,7 @@
 
 
 <script lang="ts">
-import { Component, Vue, Watch, Prop } from "nuxt-property-decorator";
+import { Component, Vue, Watch, Prop, PropSync } from "nuxt-property-decorator";
 import Events from "../domains/events/Events";
 
 @Component
@@ -100,6 +111,9 @@ export default class CreateEventDataTable extends Vue {
 
   @Prop()
   participationFeeFilter!: boolean;
+
+  @PropSync('selected', { type: Object})
+  _selected!: Events[]
 
   editedItem = {
     eventId: "",
@@ -121,13 +135,13 @@ export default class CreateEventDataTable extends Vue {
     return this.editedIndex === -1 ? "種目を追加" : "種目情報を編集";
   }
 
-  editItem(item) {
+  editItem(item: Events) {
     this.editedIndex = this.compeEvents.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
 
-  deleteItem(item) {
+  deleteItem(item: Events) {
     this.editedIndex = this.compeEvents.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialogDelete = true;

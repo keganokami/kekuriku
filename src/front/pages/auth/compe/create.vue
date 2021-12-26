@@ -109,6 +109,7 @@
           :headers="headers"
           table-title="短距離種目"
           :participation-fee-filter="participationFeeFilter"
+          :selected.sync="selected"
         ></create-event-data-table>
       </div>
       <v-btn

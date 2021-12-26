@@ -4,6 +4,12 @@ package com.rakuriku.rakuriku.domain.model.compe;
 
 import com.rakuriku.rakuriku.domain.model.BaseEntity;
 import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +29,9 @@ import javax.persistence.Table;
 @Table(name="compe"
     ,schema="public"
 )
+@TypeDefs({
+    @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+})
 public class CompeEntity extends BaseEntity implements java.io.Serializable {
 
 
@@ -121,6 +130,7 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
 
     
     @Column(name="compe_event", nullable=false)
+    @Type(type = "jsonb")
     public Serializable getCompeEvent() {
         return this.compeEvent;
     }

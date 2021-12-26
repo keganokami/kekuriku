@@ -9,4 +9,5 @@ public class EventResponse {
 	private String eventId;
 	private String eventName;
 	private String eventCategory;
+	private String participationFee;
 }
