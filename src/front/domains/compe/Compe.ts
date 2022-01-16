@@ -6,6 +6,7 @@ export default class Compe {
     public compePlace = '',
     public compeDates = '',
     public compeGuidelinesFile = null,
+    public compeFeeType = '',
     public compeEvent: Events[] = []
-  ) { }
+  ) {}
 }

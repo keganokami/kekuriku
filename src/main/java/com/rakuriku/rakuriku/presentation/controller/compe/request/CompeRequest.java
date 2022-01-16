@@ -18,5 +18,6 @@ public class CompeRequest {
 	private String compeDates;
 	private String compePlace;
 	private MultipartFile compeGuidelinesFile;
+	private String compeFeeType;
 	private List<EventDto> compeEvent;
 }

@@ -1,5 +1,5 @@
 package com.rakuriku.rakuriku.domain.model.auth;
-// Generated Dec 12, 2021, 2:20:58 PM by Hibernate Tools 5.3.9.Final
+// Generated Jan 16, 2022, 2:40:17 PM by Hibernate Tools 5.3.9.Final
 
 
 import com.rakuriku.rakuriku.domain.model.BaseEntity;

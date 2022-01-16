@@ -12,4 +12,5 @@ public class EntryEventDto {
     private String eventName;
     private String eventCategory;
     private String eventRecode;
+    private Integer participationFee;
 }

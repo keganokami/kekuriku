@@ -49,16 +49,19 @@
             label="1種目に付き参加費用を設定する"
             color="red"
             value="0"
+            v-model="compeFeeType"
           ></v-radio>
           <v-radio
             label="種目数に関係なく大会の参加費を設定する"
             color="green darken-3"
             value="1"
+            v-model="compeFeeType"
           ></v-radio>
           <v-radio
             label="種目ごとに参加費を設定する"
             color="indigo"
             value="2"
+            v-model="compeFeeType"
           ></v-radio>
         </v-radio-group>
         <v-text-field
@@ -70,43 +73,9 @@
           outlined
           :rules="[$validation.requiredRule()]"
         ></v-text-field>
-        <!-- <h3>短距離種目</h3>
-        <v-data-table
-          v-model="selected"
-          :headers="headers"
-          :items="compeEvents"
-          :single-select="singleSelect"
-          item-key="eventId"
-          show-select
-          class="elevation-1"
-          :value="selected"
-        >
-          <template v-if="radioGroup === '2'" v-slot:[`item.participationFee`]="props">
-            <v-edit-dialog
-              large
-              class="vdialognew"
-              cancel-text="閉じる"
-              save-text="確定"
-              light
-              :return-value.sync="props.item.participationFee"
-            >
-              {{ props.item.participationFee }}
-              <template v-slot:input>
-                <v-text-field
-                  v-model.number="props.item.participationFee"
-                  type="number"
-                  
-                  v-if="selected"
-                  label="Edit"
-                  single-line
-                ></v-text-field>
-              </template>
-            </v-edit-dialog>
-          </template>
-        </v-data-table> -->
         <create-event-data-table
           :compe-events="compeEvents"
-          :headers="headers"
+          :headers="hideParticipationFeeCulumn"
           table-title="短距離種目"
           :participation-fee-filter="participationFeeFilter"
           :selected.sync="selected"
@@ -140,6 +109,8 @@ export default class CreateCompe extends Vue {
   compeName = "";
   compePlace = "";
   compeDates = "";
+  compeFeeType = "";
+  participationFee = 0;
   radioGroup = "";
   compeGuidelinesFile!: File[];
   compeEvents: Events[] = [
@@ -197,7 +168,7 @@ export default class CreateCompe extends Vue {
       value: "participationFee",
     },
     {
-      text: "種目情報設定",
+      text: "",
       align: "start",
       sortable: false,
       value: "actions",
@@ -221,7 +192,7 @@ export default class CreateCompe extends Vue {
         eventId: row.eventId,
         eventName: row.eventName,
         eventCategory: row.eventCategory,
-        participationFee: 0,
+        participationFee: row.participationFee,
       };
       this.postEvents.push(event);
     }
@@ -231,6 +202,7 @@ export default class CreateCompe extends Vue {
       this.compePlace,
       this.compeDates,
       null,
+      this.compeFeeType,
       this.postEvents
     );
     this.compeService.createCompe(compe).then(() => {
@@ -241,6 +213,14 @@ export default class CreateCompe extends Vue {
   @Watch("selected")
   isDisableSubmit() {
     return this.selected.length === 0;
+  }
+
+  get hideParticipationFeeCulumn() {
+    if (this.radioGroup !== "2") {
+      return this.headers.filter(header => header.value !== "participationFee");
+    } else {
+      return this.headers;
+    }
   }
 }
 </script>

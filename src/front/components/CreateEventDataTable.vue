@@ -3,7 +3,6 @@
     :headers="headers"
     v-model="_selected"
     :items="compeEvents"
-    :single-select="singleSelect"
     item-key="eventId"
     show-select
     sort-by="calories"
@@ -26,29 +25,45 @@
             </v-card-title>
 
             <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      v-model="editedItem.eventName"
-                      label="種目名"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      v-model.number="editedItem.participationFee"
-                      type="number"
-                      label="参加費用"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-form ref="form" v-model="valid">
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-model="editedItem.eventName"
+                        label="種目名"
+                        :rules="[
+                          $validation.requiredRule(),
+                          $validation.maxLengthRule(20, '種目名'),
+                        ]"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        v-if="hasParticipationFee"
+                        v-model.number="editedItem.participationFee"
+                        type="number"
+                        label="参加費用"
+                        :value="editedItem.participationFee"
+                        :rules="[$validation.requiredRule()]"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-form>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+              <v-btn color="blue darken-1" text @click="close"> 閉じる </v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="save"
+                :disabled="!valid"
+              >
+                追加
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -112,8 +127,10 @@ export default class CreateEventDataTable extends Vue {
   @Prop()
   participationFeeFilter!: boolean;
 
-  @PropSync('selected', { type: Object})
-  _selected!: Events[]
+  @PropSync("selected", { type: Array })
+  _selected!: Events[];
+
+  valid = true;
 
   editedItem = {
     eventId: "",
@@ -175,6 +192,10 @@ export default class CreateEventDataTable extends Vue {
       this.compeEvents.push(this.editedItem);
     }
     this.close();
+  }
+
+  get hasParticipationFee() {
+    return this.headers.find((header) => header.value === "participationFee");
   }
 }
 </script>

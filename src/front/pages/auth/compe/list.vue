@@ -34,10 +34,11 @@ import CompeService from "../../../domains/compe/CompeService";
 @Component
 export default class DashBoard extends Vue {
   compeService!: CompeService;
-  myCompes!: CompeResponse[];
+  myCompes: CompeResponse[] = [];
   $router!: any;
   async fetch() {
     this.compeService = new CompeService();
+    debugger
     await this.compeService.getCompes().then((response: any) => {
       this.myCompes = response.data;
     });
