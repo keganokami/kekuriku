@@ -30,9 +30,9 @@
           ]"
         ></v-text-field>
         <v-radio-group v-model="sex" row>
-          <v-radio label="男性" value="man"></v-radio>
-          <v-radio label="女性" value="woman"></v-radio>
-          <v-radio label="回答なし" value="non"></v-radio>
+          <v-radio label="男性" value="0"></v-radio>
+          <v-radio label="女性" value="1"></v-radio>
+          <v-radio label="回答なし" value="2"></v-radio>
         </v-radio-group>
         <v-text-field
           v-model="team"
@@ -134,6 +134,7 @@ export default class EntryPage extends Vue {
   team = "";
   phoneNum = "";
   sex = "";
+  participationFee = 0;
 
   search = "";
 
@@ -167,6 +168,12 @@ export default class EntryPage extends Vue {
       value: "eventCategory",
     },
     {
+      text: "参加費",
+      align: "start",
+      sortable: false,
+      value: "participationFee",
+    },
+    {
       text: "参考記録を入力してください",
       align: "right",
       sortable: false,
@@ -174,7 +181,7 @@ export default class EntryPage extends Vue {
       cellClass: "recode-width",
     },
   ];
-$ref: any;
+  $ref: any;
   postEvents: EntryEvents[] = [];
 
   async fetch() {
@@ -190,7 +197,6 @@ $ref: any;
   }
   
   onSubmit() {
-    console.log(this.$ref.form);
     
     for (const row of this.selected) {
       const event: EntryEvents = {
@@ -198,11 +204,13 @@ $ref: any;
         eventName: row.eventName,
         eventCategory: row.eventCategory,
         eventRecode: row.eventRecode,
+        participationFee: 0
       };
       this.postEvents.push(event);
     }
 
     const entryRequest = new CompeEntry(
+      this.compeId,
       this.name,
       this.nameKana,
       this.team,
@@ -210,11 +218,9 @@ $ref: any;
       this.sex,
       this.postEvents
     );
-    console.log(entryRequest);
-    debugger;
-    // this.compeService.createCompe(compe).then(() => {
-    //   console.log("成功");
-    // });
+    this.compeService.entryCompe(entryRequest).then(() => {
+      console.log("成功");
+    });
   }
 }
 </script>

@@ -3,6 +3,7 @@ package com.rakuriku.rakuriku.domain.repository.compe;
 
 import java.util.List;
 
+import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
 
 import org.springframework.data.jpa.repository.Query;

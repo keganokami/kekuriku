@@ -14,5 +14,6 @@ public class CompeResponse {
 	private String compeName;
 	private String compeDates;
 	private String compePlace;
+	private String compeFeeType;
 	private Serializable compeEvent;
 }

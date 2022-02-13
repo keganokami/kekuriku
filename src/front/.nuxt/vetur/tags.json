@@ -1,4 +1,7 @@
 {
+  "CreateEventDataTable": {
+    "description": "Auto imported from components/CreateEventDataTable.vue"
+  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },

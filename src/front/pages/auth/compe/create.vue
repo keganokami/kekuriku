@@ -43,29 +43,68 @@
           >大会要項</v-file-input
         > -->
         <!-- コンポーネントにして、カテゴリー分回す -->
-        <h3>短距離種目</h3>
-        <v-data-table
-          v-model="selected"
-          :headers="headers"
-          :items="compeEvents"
-          :single-select="singleSelect"
-          item-key="eventId"
-          show-select
-          class="elevation-1"
-          :value="selected"
+        <h3>参加費用設定</h3>
+        <v-radio-group v-model="compeFeeType">
+          <v-radio
+            label="1種目に付き参加費用を設定する"
+            color="red"
+            value="0"
+          ></v-radio>
+          <v-radio
+            label="種目数に関係なく大会の参加費を設定する"
+            color="green darken-3"
+            value="1"
+          ></v-radio>
+          <v-radio
+            label="種目ごとに参加費を設定する"
+            color="indigo"
+            value="2"
+          ></v-radio>
+        </v-radio-group>
+        <v-text-field
+          v-if="compeFeeType === '0' || compeFeeType === '1'"
+          v-model.number="compeParticipationFee"
+          type="number"
+          name="compe-participationFee"
+          label="参加費設定"
+          outlined
+          :rules="[$validation.requiredRule()]"
+        ></v-text-field>
+
+        <create-event-data-table
+          :compe-events="compeEvents"
+          :headers="hideParticipationFeeCulumn"
+          table-title="短距離種目"
+          :participation-fee-filter="participationFeeFilter"
+          :selected.sync="selected"
+        ></create-event-data-table>
+        <v-checkbox
+          v-model="settingMaxParticipation"
+          name="comp-setting-max-participation"
+          label="出場数上限設定"
+        ></v-checkbox>
+        <v-text-field
+          v-if="settingMaxParticipation"
+          label="出場上限数"
+          outlined
+          v-model.number="compeMaxParticipation"
+          name="compe-max-participation"
+          type="number"
+          :rules="[$validation.requiredRule()]"
         />
+        <v-btn
+          :disabled="!valid || selected.length === 0"
+          name="compe-create-btn"
+          class="justify-center align-center"
+          width="100%"
+          depressed
+          color="primary"
+          type="submit"
+          @click="onSubmit()"
+        >
+          作成
+        </v-btn>
       </div>
-      <v-btn
-        :disabled="!valid || selected.length === 0"
-        name="compe-create-btn"
-        class="justify-center align-center"
-        width="170"
-        color="#4169e1"
-        type="submit"
-        @click="onSubmit()"
-      >
-        作成
-      </v-btn>
     </v-form>
   </div>
 </template>
@@ -83,27 +122,36 @@ export default class CreateCompe extends Vue {
   compeName = "";
   compePlace = "";
   compeDates = "";
+  compeFeeType = "0";
+  compeParticipationFee = 0;
+  settingMaxParticipation = false;
+  compeMaxParticipation = 0;
   compeGuidelinesFile!: File[];
-  compeEvents = [
+  compeEvents: Events[] = [
     {
       eventId: "001",
       eventName: "男子100m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
-    {
+   
+   {
       eventId: "002",
       eventName: "男子200m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
     {
       eventId: "003",
       eventName: "男子300m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
     {
       eventId: "004",
       eventName: "男子400m",
       eventCategory: "SPRINT",
+      participationFee: 0,
     },
   ];
 
@@ -128,6 +176,18 @@ export default class CreateCompe extends Vue {
       sortable: false,
       value: "eventCategory",
     },
+    {
+      text: "参加費",
+      align: "start",
+      sortable: false,
+      value: "participationFee",
+    },
+    {
+      text: "",
+      align: "start",
+      sortable: false,
+      value: "actions",
+    },
   ];
 
   postEvents: Events[] = [];
@@ -137,12 +197,17 @@ export default class CreateCompe extends Vue {
     this.compeService = new CompeService();
   }
 
+  get participationFeeFilter() {
+    return this.compeFeeType === "2";
+  }
+
   onSubmit() {
     for (const row of this.selected) {
       const event: Events = {
         eventId: row.eventId,
         eventName: row.eventName,
         eventCategory: row.eventCategory,
+        participationFee: row.participationFee,
       };
       this.postEvents.push(event);
     }
@@ -152,8 +217,15 @@ export default class CreateCompe extends Vue {
       this.compePlace,
       this.compeDates,
       null,
+      this.compeFeeType,
+      this.compeParticipationFee,
+      this.settingMaxParticipation,
+      this.compeMaxParticipation,
       this.postEvents
     );
+    debugger
+    console.log(compe);
+    
     this.compeService.createCompe(compe).then(() => {
       console.log("成功");
     });
@@ -162,6 +234,16 @@ export default class CreateCompe extends Vue {
   @Watch("selected")
   isDisableSubmit() {
     return this.selected.length === 0;
+  }
+
+  get hideParticipationFeeCulumn() {
+    if (this.compeFeeType !== "2") {
+      return this.headers.filter(
+        (header) => header.value !== "participationFee"
+      );
+    } else {
+      return this.headers;
+    }
   }
 }
 </script>

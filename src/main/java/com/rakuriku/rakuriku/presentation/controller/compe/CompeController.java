@@ -6,11 +6,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
+import com.rakuriku.rakuriku.domain.model.compe.CompeEntryManagementEntity;
+import com.rakuriku.rakuriku.domain.model.compe.EntriesEntity;
 import com.rakuriku.rakuriku.domain.service.compe.CompeService;
 import com.rakuriku.rakuriku.infra.JWTProvider;
 import com.rakuriku.rakuriku.presentation.controller.compe.request.CompeRequest;
+import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryCompeRequest;
 import com.rakuriku.rakuriku.presentation.controller.compe.response.CompeResponse;
 import com.rakuriku.rakuriku.presentation.controller.compe.response.CreateCompeResultResponse;
+import com.rakuriku.rakuriku.presentation.controller.compe.response.EntryCompeResultResonse;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,5 +60,14 @@ public class CompeController {
 		} catch (JsonProcessingException e) {
 			return new CreateCompeResultResponse("", "", "大会の作成に失敗しました。もう一度やり直してください。");
 		}
+	}
+
+	@PostMapping("/entry/new")
+	public EntryCompeResultResonse entryCompe(@RequestBody EntryCompeRequest request) {
+		String compeId = request.getCompeId();
+		EntriesEntity entry = compeFactory.createEntriesEntity(request);
+
+		CompeEntryManagementEntity entried = compeService.entryCompe(compeId, entry, request.getCompeEvent());
+		return new EntryCompeResultResonse("entried.getId()", "大会への申込が完了しました。", "");
 	}
 }

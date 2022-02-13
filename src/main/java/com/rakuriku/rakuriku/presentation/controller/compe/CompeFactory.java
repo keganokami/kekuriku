@@ -8,7 +8,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rakuriku.rakuriku.domain.model.auth.AdminsEntity;
 import com.rakuriku.rakuriku.domain.model.compe.CompeEntity;
+import com.rakuriku.rakuriku.domain.model.compe.EntriesEntity;
 import com.rakuriku.rakuriku.presentation.controller.compe.request.CompeRequest;
+import com.rakuriku.rakuriku.presentation.controller.compe.request.EntryCompeRequest;
 import com.rakuriku.rakuriku.presentation.controller.compe.response.CompeResponse;
 
 import org.modelmapper.ModelMapper;
@@ -31,11 +33,26 @@ public class CompeFactory {
 		compeEntity.setCompeName(request.getCompeName());
 		compeEntity.setCompeDates(request.getCompeDates());
 		compeEntity.setCompePlace(request.getCompePlace());
+        compeEntity.setCompeFeeType(request.getCompeFeeType());
+        compeEntity.setCompeParticipationFee(request.getCompeParticipationFee());
+        compeEntity.setSettingMaxParticipation(request.isSettingMaxParticipation());
+        compeEntity.setCompeMaxParticipation(request.getCompeMaxParticipation());
 
 		ObjectMapper objectMapper = new ObjectMapper();
         compeEntity.setCompeEvent(objectMapper.writeValueAsString(request.getCompeEvent()));
 
         return compeEntity;
+    }
+
+    public EntriesEntity createEntriesEntity(EntryCompeRequest request) {
+        EntriesEntity entriesEntity = new EntriesEntity();
+        entriesEntity.setId(UUID.randomUUID().toString());
+        entriesEntity.setName(request.getName());
+        entriesEntity.setNameKana(request.getNameKana());
+        entriesEntity.setPhoneNumber(request.getPhoneNum());
+        entriesEntity.setSex(request.getSex());
+        entriesEntity.setNumber("001");
+        return entriesEntity;
     }
 
     public List<CompeResponse> createCompeResponse(List<CompeEntity> compeEntities) {
