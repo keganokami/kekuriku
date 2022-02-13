@@ -33,6 +33,10 @@ public class CompeFactory {
 		compeEntity.setCompeName(request.getCompeName());
 		compeEntity.setCompeDates(request.getCompeDates());
 		compeEntity.setCompePlace(request.getCompePlace());
+        compeEntity.setCompeFeeType(request.getCompeFeeType());
+        compeEntity.setCompeParticipationFee(request.getCompeParticipationFee());
+        compeEntity.setSettingMaxParticipation(request.isSettingMaxParticipation());
+        compeEntity.setCompeMaxParticipation(request.getCompeMaxParticipation());
 
 		ObjectMapper objectMapper = new ObjectMapper();
         compeEntity.setCompeEvent(objectMapper.writeValueAsString(request.getCompeEvent()));

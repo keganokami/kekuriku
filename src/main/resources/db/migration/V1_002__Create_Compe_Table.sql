@@ -6,6 +6,9 @@ create table compe (
   compe_place VARCHAR(100) NOT NULL,
   compe_guidelines_file BYTEA,
   compe_fee_type CHAR(1) NOT NULL,
+  compe_participation_fee INTEGER,
+  setting_max_participation boolean NOT NULL,
+  compe_max_participation INTEGER NOT NULL,
   compe_event JSONB NOT NULL,
   ${commonColumns}
 );

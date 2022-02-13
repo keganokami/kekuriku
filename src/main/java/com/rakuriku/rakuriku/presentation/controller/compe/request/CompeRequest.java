@@ -19,5 +19,8 @@ public class CompeRequest {
 	private String compePlace;
 	private MultipartFile compeGuidelinesFile;
 	private String compeFeeType;
+	private Integer compeParticipationFee;
+	private boolean settingMaxParticipation;
+	private Integer compeMaxParticipation;
 	private List<EventDto> compeEvent;
 }

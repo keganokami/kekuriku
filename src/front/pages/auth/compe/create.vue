@@ -44,35 +44,33 @@
         > -->
         <!-- コンポーネントにして、カテゴリー分回す -->
         <h3>参加費用設定</h3>
-        <v-radio-group v-model="radioGroup">
+        <v-radio-group v-model="compeFeeType">
           <v-radio
             label="1種目に付き参加費用を設定する"
             color="red"
             value="0"
-            v-model="compeFeeType"
           ></v-radio>
           <v-radio
             label="種目数に関係なく大会の参加費を設定する"
             color="green darken-3"
             value="1"
-            v-model="compeFeeType"
           ></v-radio>
           <v-radio
             label="種目ごとに参加費を設定する"
             color="indigo"
             value="2"
-            v-model="compeFeeType"
           ></v-radio>
         </v-radio-group>
         <v-text-field
-          v-if="radioGroup === '0' || radioGroup === '1'"
-          v-model.number="participationFee"
+          v-if="compeFeeType === '0' || compeFeeType === '1'"
+          v-model.number="compeParticipationFee"
           type="number"
           name="compe-participationFee"
           label="参加費設定"
           outlined
           :rules="[$validation.requiredRule()]"
         ></v-text-field>
+
         <create-event-data-table
           :compe-events="compeEvents"
           :headers="hideParticipationFeeCulumn"
@@ -80,18 +78,33 @@
           :participation-fee-filter="participationFeeFilter"
           :selected.sync="selected"
         ></create-event-data-table>
+        <v-checkbox
+          v-model="settingMaxParticipation"
+          name="comp-setting-max-participation"
+          label="出場数上限設定"
+        ></v-checkbox>
+        <v-text-field
+          v-if="settingMaxParticipation"
+          label="出場上限数"
+          outlined
+          v-model.number="compeMaxParticipation"
+          name="compe-max-participation"
+          type="number"
+          :rules="[$validation.requiredRule()]"
+        />
+        <v-btn
+          :disabled="!valid || selected.length === 0"
+          name="compe-create-btn"
+          class="justify-center align-center"
+          width="100%"
+          depressed
+          color="primary"
+          type="submit"
+          @click="onSubmit()"
+        >
+          作成
+        </v-btn>
       </div>
-      <v-btn
-        :disabled="!valid || selected.length === 0"
-        name="compe-create-btn"
-        class="justify-center align-center"
-        width="170"
-        color="#4169e1"
-        type="submit"
-        @click="onSubmit()"
-      >
-        作成
-      </v-btn>
     </v-form>
   </div>
 </template>
@@ -109,9 +122,10 @@ export default class CreateCompe extends Vue {
   compeName = "";
   compePlace = "";
   compeDates = "";
-  compeFeeType = "";
-  participationFee = 0;
-  radioGroup = "";
+  compeFeeType = "0";
+  compeParticipationFee = 0;
+  settingMaxParticipation = false;
+  compeMaxParticipation = 0;
   compeGuidelinesFile!: File[];
   compeEvents: Events[] = [
     {
@@ -120,7 +134,8 @@ export default class CreateCompe extends Vue {
       eventCategory: "SPRINT",
       participationFee: 0,
     },
-    {
+   
+   {
       eventId: "002",
       eventName: "男子200m",
       eventCategory: "SPRINT",
@@ -183,7 +198,7 @@ export default class CreateCompe extends Vue {
   }
 
   get participationFeeFilter() {
-    return this.radioGroup === "2";
+    return this.compeFeeType === "2";
   }
 
   onSubmit() {
@@ -203,8 +218,14 @@ export default class CreateCompe extends Vue {
       this.compeDates,
       null,
       this.compeFeeType,
+      this.compeParticipationFee,
+      this.settingMaxParticipation,
+      this.compeMaxParticipation,
       this.postEvents
     );
+    debugger
+    console.log(compe);
+    
     this.compeService.createCompe(compe).then(() => {
       console.log("成功");
     });
@@ -216,8 +237,10 @@ export default class CreateCompe extends Vue {
   }
 
   get hideParticipationFeeCulumn() {
-    if (this.radioGroup !== "2") {
-      return this.headers.filter(header => header.value !== "participationFee");
+    if (this.compeFeeType !== "2") {
+      return this.headers.filter(
+        (header) => header.value !== "participationFee"
+      );
     } else {
       return this.headers;
     }

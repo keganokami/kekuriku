@@ -1,5 +1,5 @@
 package com.rakuriku.rakuriku.domain.model.compe;
-// Generated Jan 16, 2022, 2:40:17 PM by Hibernate Tools 5.3.9.Final
+// Generated Feb 13, 2022, 1:49:09 PM by Hibernate Tools 5.3.9.Final
 
 
 import java.io.Serializable;
@@ -43,6 +43,9 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
      private String compePlace;
      private byte[] compeGuidelinesFile;
      private String compeFeeType;
+     private Integer compeParticipationFee;
+     private boolean settingMaxParticipation;
+     private int compeMaxParticipation;
      private Serializable compeEvent;
      private Set<CompeEntryManagementEntity> compeEntryManagements = new HashSet<CompeEntryManagementEntity>(0);
 
@@ -50,15 +53,17 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
     }
 
 	
-    public CompeEntity(String compeId, String compeName, String compeDates, String compePlace, String compeFeeType, Serializable compeEvent) {
+    public CompeEntity(String compeId, String compeName, String compeDates, String compePlace, String compeFeeType, boolean settingMaxParticipation, int compeMaxParticipation, Serializable compeEvent) {
         this.compeId = compeId;
         this.compeName = compeName;
         this.compeDates = compeDates;
         this.compePlace = compePlace;
         this.compeFeeType = compeFeeType;
+        this.settingMaxParticipation = settingMaxParticipation;
+        this.compeMaxParticipation = compeMaxParticipation;
         this.compeEvent = compeEvent;
     }
-    public CompeEntity(String compeId, AdminsEntity admins, String compeName, String compeDates, String compePlace, byte[] compeGuidelinesFile, String compeFeeType, Serializable compeEvent, Set<CompeEntryManagementEntity> compeEntryManagements) {
+    public CompeEntity(String compeId, AdminsEntity admins, String compeName, String compeDates, String compePlace, byte[] compeGuidelinesFile, String compeFeeType, Integer compeParticipationFee, boolean settingMaxParticipation, int compeMaxParticipation, Serializable compeEvent, Set<CompeEntryManagementEntity> compeEntryManagements) {
        this.compeId = compeId;
        this.admins = admins;
        this.compeName = compeName;
@@ -66,6 +71,9 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
        this.compePlace = compePlace;
        this.compeGuidelinesFile = compeGuidelinesFile;
        this.compeFeeType = compeFeeType;
+       this.compeParticipationFee = compeParticipationFee;
+       this.settingMaxParticipation = settingMaxParticipation;
+       this.compeMaxParticipation = compeMaxParticipation;
        this.compeEvent = compeEvent;
        this.compeEntryManagements = compeEntryManagements;
     }
@@ -140,6 +148,36 @@ public class CompeEntity extends BaseEntity implements java.io.Serializable {
     
     public void setCompeFeeType(String compeFeeType) {
         this.compeFeeType = compeFeeType;
+    }
+
+    
+    @Column(name="compe_participation_fee")
+    public Integer getCompeParticipationFee() {
+        return this.compeParticipationFee;
+    }
+    
+    public void setCompeParticipationFee(Integer compeParticipationFee) {
+        this.compeParticipationFee = compeParticipationFee;
+    }
+
+    
+    @Column(name="setting_max_participation", nullable=false)
+    public boolean isSettingMaxParticipation() {
+        return this.settingMaxParticipation;
+    }
+    
+    public void setSettingMaxParticipation(boolean settingMaxParticipation) {
+        this.settingMaxParticipation = settingMaxParticipation;
+    }
+
+    
+    @Column(name="compe_max_participation", nullable=false)
+    public int getCompeMaxParticipation() {
+        return this.compeMaxParticipation;
+    }
+    
+    public void setCompeMaxParticipation(int compeMaxParticipation) {
+        this.compeMaxParticipation = compeMaxParticipation;
     }
 
     
